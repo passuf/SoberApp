@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
         Button add3Last = (Button) findViewById(R.id.button_add_3last_drink);
         Button addDrink = (Button) findViewById(R.id.button_add_drink);
 
-        if (eventList.size() > 0) {
+        if (CollisionDetector.getCollisions(this, alc.timeSober().getTime()).size() > 0) {
             addLast.setTextColor(Color.RED);
             add2Last.setTextColor(Color.RED);
             add3Last.setTextColor(Color.RED);

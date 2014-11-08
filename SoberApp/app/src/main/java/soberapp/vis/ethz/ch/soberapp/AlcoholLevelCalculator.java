@@ -28,11 +28,11 @@ public class AlcoholLevelCalculator {
         this.alcoholLevel = consumor.level();
         this.settings = new Settings(context);
         if (settings.getSex() == "Female") {
-            reductionFactor = 1055 * (0.203 - 0.07 * settings.getAge() + 0.1069 * settings.getHeight() + 0.2466 * settings.getWeight()) / (0.8 * settings.getWeight());
+            reductionFactor = 1055 * (0.203 - 0.07 * settings.getAge() + 0.1069 * settings.getHeight() + 0.2466 * settings.getWeight()) / (0.8);
             decFactor = 0.15 / 60;
         }
         else {
-            reductionFactor = 1055 * (2.447 - 0.09516 * settings.getAge() + 0.1074 * settings.getHeight() * 0.3362 * settings.getWeight()) / (0.8 * settings.getWeight());
+            reductionFactor = 1.055 * (2.447 - 0.09516 * settings.getAge() + 0.1074 * settings.getHeight() + 0.3362 * settings.getWeight()) / (0.8);
             decFactor = 0.15 / 60;
         }
 
@@ -46,7 +46,7 @@ public class AlcoholLevelCalculator {
 
     public void addDrink(Drink drink) {
         consumor.consume(drink);
-        alcoholLevel += (drink.getSize() * drink.getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor) * 0.9;
+        alcoholLevel += (drink.getSize() * drink.getPercent()/100 * 0.8) / (reductionFactor) * 0.9;
     }
 
     private void calculateAlcoholLevel()

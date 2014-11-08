@@ -9,13 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
 import soberapp.vis.ethz.ch.soberapp.data.InitialData;
-
-import static com.orm.SugarRecord.deleteAll;
-
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -50,7 +50,13 @@ public class MainActivity extends Activity {
 
         TextView title = (TextView) findViewById(R.id.text_title_main);
         title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
+
+        List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
+        EventListAdapter adapter = new EventListAdapter(eventList, this, new Date(System.currentTimeMillis() + 2*60*60*1000));
+        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
+        eventView.setAdapter(adapter);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

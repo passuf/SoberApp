@@ -8,9 +8,22 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="soberapp.vis.ethz.ch.soberapp.AddDrinkActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:hint="@string/search_drinks"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:lines="1"
+        android:maxLines="1"
+        android:inputType="textPersonName" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/drinks_listView"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

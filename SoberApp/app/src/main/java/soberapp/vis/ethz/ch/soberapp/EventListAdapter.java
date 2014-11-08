@@ -41,15 +41,11 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
         CalendarInstance event = eventList.get(position);
 
         tv.setText(event.getEventTitle());
-        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String s = formatter.format(event.getEventStart());
         dateView.setText(s);
         if (event.getEventStart().before(soberDate)) {
-            tv.setBackgroundColor(Color.RED);
-            dateView.setBackgroundColor(Color.RED);
-        } else {
-            tv.setBackgroundColor(Color.GREEN);
-            dateView.setBackgroundColor(Color.GREEN);
+            tv.setTextColor(Color.RED);
         }
 
 

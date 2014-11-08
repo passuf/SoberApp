@@ -82,4 +82,16 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, AddDrinkActivity.class);
         startActivity(intent);
     }
+
+    public void addLastDrink(View view) {
+        /* TODO */
+    }
+
+    public void add2LastDrink(View view) {
+        /* TODO */
+    }
+
+    public void add3LastDrink(View view) {
+        /* TODO */
+    }
 }

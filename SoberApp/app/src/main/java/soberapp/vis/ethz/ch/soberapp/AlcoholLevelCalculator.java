@@ -7,6 +7,7 @@ import java.util.Date;
 
 import soberapp.vis.ethz.ch.soberapp.data.Consum0r;
 import soberapp.vis.ethz.ch.soberapp.data.Consume;
+import soberapp.vis.ethz.ch.soberapp.data.Drink;
 
 /**
  * Created by schluemi on 08/11/14.
@@ -44,8 +45,10 @@ public class AlcoholLevelCalculator {
         return new Date(updateTime + (long)(alcoholLevel / decFactor * 60 * 1000));
     }
 
-    public void addDrink(Consume consume) {
-        alcoholLevel += (consume.getDrink().getSize() * consume.getDrink().getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor) * 0.9;
+    public double addDrink(Drink drink) {
+        alcoholLevel += (drink.getSize() * drink.getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor) * 0.9;
+        calculateAlcoholLevel();
+        return alcoholLevel;
     }
 
     private void calculateAlcoholLevel()

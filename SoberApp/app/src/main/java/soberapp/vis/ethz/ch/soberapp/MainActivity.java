@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import soberapp.vis.ethz.ch.soberapp.data.Consum0r;
 import soberapp.vis.ethz.ch.soberapp.data.InitialData;
 import java.util.Date;
 import java.util.List;
@@ -19,11 +20,12 @@ public class MainActivity extends Activity {
     private static final String LOG_TAG = "MainActivity";
 
     private Settings settings;
-
+    private AlcoholLevelCalculator alc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        alc = new AlcoholLevelCalculator(this, Consum0r.getInstance());
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
 
@@ -47,9 +49,22 @@ public class MainActivity extends Activity {
 
         TextView title = (TextView) findViewById(R.id.text_title_main);
         title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
+        update();
+    }
+
+    private void update(){
+
+        long timeDiffMin = (alc.timeSober().getTime() - System.currentTimeMillis())/(1000*60);
+        long timeDiffHour = timeDiffMin/60;
+        timeDiffMin = timeDiffMin % 60;
+        TextView soberTime = (TextView) findViewById(R.id.soberTime);
+        soberTime.setText(String.format("sober in %dh %dmin", timeDiffHour, timeDiffMin));
+
+        TextView bac = (TextView) findViewById(R.id.BAC);
+        bac.setText(alc.getAlcoholLevel() + " \u2030");
 
         List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
-        EventListAdapter adapter = new EventListAdapter(eventList, this, new Date(System.currentTimeMillis() + 2*60*60*1000));
+        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
         ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
         eventView.setAdapter(adapter);
     }

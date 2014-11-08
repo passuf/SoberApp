@@ -33,4 +33,9 @@ public class Drink extends SugarRecord<Drink> {
     public long getLastAccess() {
         return lastAccess;
     }
+
+    @Override
+    public String toString(){
+        return this.getName() + " - " + this.getPercent() + "%";
+    }
 }

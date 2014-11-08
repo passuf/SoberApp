@@ -12,9 +12,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import soberapp.vis.ethz.ch.soberapp.data.Drink;
+import soberapp.vis.ethz.ch.soberapp.data.InitialData;
 import java.util.Date;
 import java.util.List;
-
 
 public class MainActivity extends Activity {
 
@@ -28,6 +29,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
+
+        // initialize the Database
+        InitialData.initDB();
 
         // Load Settings
         settings = new Settings(this);

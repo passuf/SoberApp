@@ -11,6 +11,10 @@
     <string name="male">Male</string>
     <string name="default_name">Mrs. X</string>
     <string name="add_drink">Add Drink</string>
+    <string name="invalid_name">Please enter a name.</string>
+    <string name="invalid_weight">Please enter your weight.</string>
+    <string name="invalid_height">Please enter your height.</string>
+    <string name="form_error">Error</string>
     <string-array name="gender_selcection">
         <item>Female</item>
         <item>Male</item>

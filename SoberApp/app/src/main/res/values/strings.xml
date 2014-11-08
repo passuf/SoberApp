@@ -7,6 +7,7 @@
     <string name="title_activity_intro">Welcome to our awesome App!</string>
     <string name="intro_description">Please tell me something about you.</string>
     <string name="title_activity_add_drink">Add Drink</string>
+    <string name="button_intro_start">Start</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="default_name">Mrs. X</string>
@@ -15,7 +16,12 @@
     <string name="invalid_weight">Please enter your weight.</string>
     <string name="invalid_height">Please enter your height.</string>
     <string name="form_error">Error</string>
-    <string-array name="gender_selcection">
+    <string name="search_drinks">Start typing to find your drink...</string>
+    <string name="form_name">Your Name</string>
+    <string name="form_birthday">Your Birthday</string>
+    <string name="form_height">Your Height</string>
+    <string name="form_weight">Your Weight</string>
+    <string-array name="gender_selection">
         <item>Female</item>
         <item>Male</item>
         <item>Robot</item>

@@ -2,7 +2,11 @@ package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.method.KeyListener;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import soberapp.vis.ethz.ch.soberapp.data.Consum0r;
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
 
 
@@ -21,6 +26,8 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
     private static final String LOG_TAG = "AddDrinkActivity";
 
     private ListView drinksListView;
+    private ArrayAdapter<String> drinksAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +37,7 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
         // FIXME: remove those debug drinks
         // Create some debug drinks
-        List<Drink> drinks = new ArrayList<Drink>();
-        drinks.add(new Drink("Beer", 5));
-        drinks.add(new Drink("Wine", 12));
-        drinks.add(new Drink("Vodka", 30));
+        List<Drink> drinks = Consum0r.getInstance().drinks();
 
         drinksListView = (ListView) findViewById(R.id.drinks_listView);
         drinksListView.setOnItemClickListener(this);
@@ -43,7 +47,8 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
             drinkNames.add(d.getName());
         }
 
-        drinksListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, drinkNames));
+        drinksAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, drinkNames);
+        drinksListView.setAdapter(drinksAdapter);
     }
 
 
@@ -74,5 +79,25 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     public void selectDrink(Drink drink) {
         // TODO
+    }
+
+
+    class SearchKeyListener implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // Do nothing
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // Do nothing
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // Change the list with search results
+
+        }
     }
 }

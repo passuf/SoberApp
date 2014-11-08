@@ -4,7 +4,7 @@ import static com.orm.SugarRecord.deleteAll;
 
 public class InitialData {
     public static void initDB(){
-        deleteAll(Drink.class);
+//        deleteAll(Drink.class);
         new Drink("Beer", 4.0).save();
         new Drink("Beer", 5.0).save();
         new Drink("Cider", 4.5).save();

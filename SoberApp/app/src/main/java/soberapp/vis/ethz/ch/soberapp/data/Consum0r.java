@@ -18,8 +18,8 @@ public class Consum0r {
     }
 
     private Consum0r() {
-        List<Consume> list = findWithQuery(Consume.class, "SELECT * FROM Consume ORDERBY tsp DESC LIMIT 1");
-        last = !list.isEmpty() ? list.get(0) : new Consume(null, 0, 0);
+//        List<Consume> list = findWithQuery(Consume.class, "SELECT * FROM Consume ORDERBY tsp DESC LIMIT 1");
+//        last = !list.isEmpty() ? list.get(0) : new Consume(null, 0, 0);
     }
 
     public void consume(Drink drink, int amount) {

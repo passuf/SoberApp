@@ -44,7 +44,7 @@ public class AlcoholLevelCalculator {
     }
 
     public void addDrink(Consume consume) {
-        alcoholLevel += (consume.getAmount() * consume.getDrink().getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor);
+        alcoholLevel += (consume.getDrink().getSize() * consume.getDrink().getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor);
     }
 
     public double getAlcoholLevel()

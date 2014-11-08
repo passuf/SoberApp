@@ -15,6 +15,8 @@
     <string name="invalid_name">Please enter a name.</string>
     <string name="invalid_weight">Please enter your weight.</string>
     <string name="invalid_height">Please enter your height.</string>
+    <string name="invalid_volume">Please enter a volume.</string>
+    <string name="invalid_percentage">Please enter a valid percentage.</string>
     <string name="form_error">Error</string>
     <string name="search_drinks">Start typing to find your drink...</string>
     <string name="form_name">Your Name</string>
@@ -26,10 +28,18 @@
     <string name="add_2last_drink">TODO</string>
     <string name="add_3last_drink">TODO</string>
     <string name="create_drink">Create new Drink</string>
+
     <string-array name="gender_selection">
         <item>Female</item>
         <item>Male</item>
         <item>Robot</item>
     </string-array>
+
+    <string name="title_activity_create_drink">Create new Drink</string>
+    <string name="create_drink_hint">Title</string>
+    <string name="create_drink_volume_hint">Volume</string>
+    <string name="create_drink_percent">Volume %</string>
+    <string name="create_drink_cancel">Cancel</string>
+    <string name="button_create_drink">Create Drink</string>
 
 </resources>

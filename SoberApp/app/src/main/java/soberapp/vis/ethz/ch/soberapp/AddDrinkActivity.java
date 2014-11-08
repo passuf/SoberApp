@@ -1,6 +1,7 @@
 package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -92,11 +93,14 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     public void selectDrink(Drink drink) {
         Log.d(LOG_TAG, "Clicked on " + drink);
+        // TODO: Consume the drink
         //Consum0r.getInstance().consume(drink);
     }
 
     public void onCreateDrink(View v) {
         Log.d(LOG_TAG, "create drink");
+        Intent intent = new Intent(this, CreateDrinkActivity.class);
+        startActivity(intent);
     }
 
 

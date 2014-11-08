@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="soberapp.vis.ethz.ch.soberapp" >
+
     <uses-permission android:name="android.permission.READ_CALENDAR" />
 
     <application
+        android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="com.orm.SugarApp"
-        >
+        android:theme="@style/AppTheme" >
 
-        <!-- Sugar ORM goes here  -->
-        <meta-data android:name="DATABASE" android:value="soberapp.db" />
-        <!-- Sugar ORM ends here  -->
+        <!-- Sugar ORM goes here -->
+        <meta-data
+            android:name="DATABASE"
+            android:value="soberapp.db" />
+        <!-- Sugar ORM ends here -->
 
         <activity
             android:name=".MainActivity"
@@ -45,6 +47,15 @@
             android:name=".AddDrinkActivity"
             android:label="@string/title_activity_add_drink"
             android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="soberapp.vis.ethz.ch.soberapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CreateDrinkActivity"
+            android:label="@string/title_activity_create_drink"
+            android:parentActivityName=".AddDrinkActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="soberapp.vis.ethz.ch.soberapp.MainActivity" />

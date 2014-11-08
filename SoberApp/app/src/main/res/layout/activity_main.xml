@@ -24,4 +24,9 @@
         android:layout_marginTop="50dp"
         android:onClick="addDrink" />
 
+    <ListView
+        android:id="@+id/calendarInstancesView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
 </RelativeLayout>

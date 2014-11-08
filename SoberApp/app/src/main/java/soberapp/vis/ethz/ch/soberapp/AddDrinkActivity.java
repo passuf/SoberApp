@@ -1,14 +1,11 @@
 package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +18,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import soberapp.vis.ethz.ch.soberapp.data.Consum0r;
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
 
 
@@ -29,10 +25,15 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     private static final String LOG_TAG = "AddDrinkActivity";
 
+    private AlcoholLevelCalculator alc;
     private ListView drinksListView;
     private List<Drink> drinks;
     private List<String> drinkNames;
     private ArrayAdapter<String> drinksAdapter;
+
+    public AddDrinkActivity(AlcoholLevelCalculator alc) {
+        this.alc = alc;
+    }
 
 
     @Override
@@ -42,7 +43,7 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
         setTitle(R.string.title_activity_add_drink);
 
         // Get drinks
-        drinks = Consum0r.getInstance().drinks();
+        drinks = alc.getConsumor().drinks();
 
         // Create list with drinks
         drinksListView = (ListView) findViewById(R.id.drinks_listView);
@@ -55,7 +56,7 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
         drinksListView.setAdapter(drinksAdapter);
 
         // Add button to create new drink
-        View footerView =  ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.drinks_footer, null, false);
+        View footerView = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.drinks_footer, null, false);
         drinksListView.addFooterView(footerView);
 
         // Add listener to search field
@@ -94,7 +95,7 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     public void selectDrink(Drink drink) {
         Log.d(LOG_TAG, "Clicked on " + drink);
-        Consum0r.getInstance().consume(drink);
+        alc.addDrink(drink);
         finish();
     }
 

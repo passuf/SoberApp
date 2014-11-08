@@ -14,15 +14,16 @@ import soberapp.vis.ethz.ch.soberapp.data.Drink;
  */
 public class AlcoholLevelCalculator {
 
-
+    private Consum0r consumor;
     private long updateTime;
     private double alcoholLevel;
     private double reductionFactor;
     private double decFactor;
     private Settings settings;
 
-    public AlcoholLevelCalculator(Context context, Consum0r consumor)
+    public AlcoholLevelCalculator(Context context)
     {
+        this.consumor = new Consum0r(this);
         this.updateTime = consumor.time().getTime();
         this.alcoholLevel = consumor.level();
         this.settings = new Settings(context);
@@ -44,6 +45,7 @@ public class AlcoholLevelCalculator {
     }
 
     public void addDrink(Drink drink) {
+        consumor.consume(drink);
         alcoholLevel += (drink.getSize() * drink.getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor) * 0.9;
     }
 
@@ -61,6 +63,10 @@ public class AlcoholLevelCalculator {
     {
         calculateAlcoholLevel();
         return alcoholLevel;
+    }
+
+    public Consum0r getConsumor() {
+        return consumor;
     }
 
 }

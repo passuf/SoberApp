@@ -12,10 +12,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import soberapp.vis.ethz.ch.soberapp.data.Consum0r;
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
 import soberapp.vis.ethz.ch.soberapp.data.InitialData;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -29,7 +27,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        alc = new AlcoholLevelCalculator(this, Consum0r.getInstance());
+        alc = new AlcoholLevelCalculator(this);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
 
@@ -88,7 +86,7 @@ public class MainActivity extends Activity {
             addDrink.setTextColor(Color.RED);
         }
 
-        last3Drinks = Consum0r.getInstance().topN();
+        last3Drinks = alc.getConsumor().topN();
         if (last3Drinks.size()>=1) {
             addLast.setText(last3Drinks.get(0).getName());
         }
@@ -130,7 +128,7 @@ public class MainActivity extends Activity {
         if (last3Drinks.size()<1) {
             return;
         }
-        Consum0r.getInstance().consume(last3Drinks.get(0));
+        alc.addDrink(last3Drinks.get(0));
         update();
     }
 
@@ -138,7 +136,7 @@ public class MainActivity extends Activity {
         if (last3Drinks.size()<2) {
             return;
         }
-        Consum0r.getInstance().consume(last3Drinks.get(1));
+        alc.addDrink(last3Drinks.get(1));
         update();
     }
 
@@ -146,7 +144,7 @@ public class MainActivity extends Activity {
         if (last3Drinks.size()<3) {
             return;
         }
-        Consum0r.getInstance().consume(last3Drinks.get(2));
+        alc.addDrink(last3Drinks.get(2));
         update();
     }
 }

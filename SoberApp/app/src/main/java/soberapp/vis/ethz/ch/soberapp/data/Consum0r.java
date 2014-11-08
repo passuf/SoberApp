@@ -5,29 +5,26 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import soberapp.vis.ethz.ch.soberapp.AlcoholLevelCalculator;
+
 import static com.orm.SugarRecord.find;
 import static com.orm.SugarRecord.findAll;
 import static com.orm.SugarRecord.findWithQuery;
 
 
 public class Consum0r {
-    private static Consum0r instance = new Consum0r();
-
     public static final int TOP_N = 3;
     private Consume last;
+    private AlcoholLevelCalculator calc;
 
-    public static Consum0r getInstance() {
-        return instance;
-    }
-
-    private Consum0r() {
+    public Consum0r(AlcoholLevelCalculator calc) {
+        this.calc = calc;
         List<Consume> list = find(Consume.class, null, null, null, "tsp DESC", "1");
         last = !list.isEmpty() ? list.get(0) : null;
     }
 
     public void consume(Drink drink) {
-        // TODO recalculate level
-        Consume c = new Consume(drink, last, 0);
+        Consume c = new Consume(drink, last, calc.getAlcoholLevel());
         c.save();
         last = c;
     }

@@ -53,7 +53,7 @@ public class AlcoholLevelCalculator {
     {
         long currentTime = System.currentTimeMillis();
 
-        alcoholLevel -= (currentTime - updateTime) / 1000 / 60 * 0.0025;
+        alcoholLevel -= (currentTime - updateTime) / 1000 / 60 * decFactor;
         if (alcoholLevel < 0)
             alcoholLevel = 0;
         updateTime = currentTime;

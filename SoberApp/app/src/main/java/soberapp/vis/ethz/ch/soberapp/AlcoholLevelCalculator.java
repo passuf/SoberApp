@@ -40,14 +40,15 @@ public class AlcoholLevelCalculator {
 
     public Date timeSober()
     {
+        calculateAlcoholLevel();
         return new Date(updateTime + (long)(alcoholLevel / decFactor * 60 * 1000));
     }
 
     public void addDrink(Consume consume) {
-        alcoholLevel += (consume.getDrink().getSize() * consume.getDrink().getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor);
+        alcoholLevel += (consume.getDrink().getSize() * consume.getDrink().getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor) * 0.9;
     }
 
-    public double getAlcoholLevel()
+    private void calculateAlcoholLevel()
     {
         long currentTime = System.currentTimeMillis();
 
@@ -55,7 +56,11 @@ public class AlcoholLevelCalculator {
         if (alcoholLevel < 0)
             alcoholLevel = 0;
         updateTime = currentTime;
+    }
 
+    public double getAlcoholLevel()
+    {
+        calculateAlcoholLevel();
         return alcoholLevel;
     }
 

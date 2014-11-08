@@ -45,11 +45,11 @@ public class Consum0r {
         Consume item = last;
         int i = 0;
         while (item != null && i < TOP_N) {
-            item = item.getLast();
             if (!drinks.contains(item)) {
                 drinks.add(item.getDrink());
                 i++;
             }
+            item = item.getLast();
         }
         // fill with default, assuming more then 3 drinks in DB
         Iterator<Drink> it = findAll(Drink.class);

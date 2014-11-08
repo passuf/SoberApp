@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import soberapp.vis.ethz.ch.soberapp.data.Consum0r;
+import soberapp.vis.ethz.ch.soberapp.data.Drink;
 import soberapp.vis.ethz.ch.soberapp.data.InitialData;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
 
     private Settings settings;
     private AlcoholLevelCalculator alc;
+    private List<Drink> last3Drinks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +75,28 @@ public class MainActivity extends Activity {
         ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
         eventView.setAdapter(adapter);
 
+
+        Button addLast = (Button) findViewById(R.id.button_add_last_drink);
+        Button add2Last = (Button) findViewById(R.id.button_add_2last_drink);
+        Button add3Last = (Button) findViewById(R.id.button_add_3last_drink);
+        Button addDrink = (Button) findViewById(R.id.button_add_drink);
+
         if (eventList.size() > 0) {
-            Button addLast = (Button) findViewById(R.id.button_add_last_drink);
             addLast.setTextColor(Color.RED);
-            Button add2Last = (Button) findViewById(R.id.button_add_2last_drink);
             add2Last.setTextColor(Color.RED);
-            Button add3Last = (Button) findViewById(R.id.button_add_3last_drink);
             add3Last.setTextColor(Color.RED);
-            Button addDrink = (Button) findViewById(R.id.button_add_drink);
             addDrink.setTextColor(Color.RED);
+        }
+
+        last3Drinks = Consum0r.getInstance().topN();
+        if (last3Drinks.size()>=1) {
+            addLast.setText(last3Drinks.get(0).getName());
+        }
+        if (last3Drinks.size()>=2) {
+            add2Last.setText(last3Drinks.get(1).getName());
+        }
+        if (last3Drinks.size()>=3) {
+            add3Last.setText(last3Drinks.get(2).getName());
         }
     }
 
@@ -112,14 +127,26 @@ public class MainActivity extends Activity {
     }
 
     public void addLastDrink(View view) {
-        /* TODO */
+        if (last3Drinks.size()<1) {
+            return;
+        }
+        Consum0r.getInstance().consume(last3Drinks.get(0));
+        update();
     }
 
     public void add2LastDrink(View view) {
-        /* TODO */
+        if (last3Drinks.size()<2) {
+            return;
+        }
+        Consum0r.getInstance().consume(last3Drinks.get(1));
+        update();
     }
 
     public void add3LastDrink(View view) {
-        /* TODO */
+        if (last3Drinks.size()<3) {
+            return;
+        }
+        Consum0r.getInstance().consume(last3Drinks.get(2));
+        update();
     }
 }

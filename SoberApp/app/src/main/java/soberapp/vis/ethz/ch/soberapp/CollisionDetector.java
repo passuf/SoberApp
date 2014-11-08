@@ -37,11 +37,13 @@ public class CollisionDetector {
         cursor.moveToFirst();
         while (cursor.moveToNext()) {
             String instanceTitle = cursor.getString(cursor.getColumnIndex(CalendarContract.Instances.TITLE));
-            Log.d("CollisionDetector", "Event: " + instanceTitle);
+            Log.d(LOG_TAG, "Event: " + instanceTitle);
             long instanceStart = Long.valueOf(cursor.getString(cursor.getColumnIndex(CalendarContract.Instances.BEGIN))).longValue();
             long instanceEnd = Long.valueOf(cursor.getString(cursor.getColumnIndex(CalendarContract.Instances.END))).longValue();
             collisionList.add(new CalendarInstance(instanceStart, instanceEnd, instanceTitle));
         }
         return collisionList;
     }
+
+    private static final String LOG_TAG = "CollisionDetector";
 }

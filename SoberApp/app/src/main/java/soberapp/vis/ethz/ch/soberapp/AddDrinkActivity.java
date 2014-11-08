@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
     private static final String LOG_TAG = "AddDrinkActivity";
 
     private ListView drinksListView;
+    private List<Drink> drinks;
+    private List<String> drinkNames;
     private ArrayAdapter<String> drinksAdapter;
 
 
@@ -35,20 +38,23 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
         setContentView(R.layout.activity_add_drink);
         setTitle(R.string.title_activity_add_drink);
 
-        // FIXME: remove those debug drinks
-        // Create some debug drinks
-        List<Drink> drinks = Consum0r.getInstance().drinks();
+        // Get drinks
+        drinks = Consum0r.getInstance().drinks();
 
+        // Create list with drinks
         drinksListView = (ListView) findViewById(R.id.drinks_listView);
         drinksListView.setOnItemClickListener(this);
-
-        List<String> drinkNames = new ArrayList<String>();
+        drinkNames = new ArrayList<String>();
         for (Drink d : drinks) {
-            drinkNames.add(d.getName());
+            drinkNames.add(d.toString());
         }
-
         drinksAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, drinkNames);
         drinksListView.setAdapter(drinksAdapter);
+
+        // Add listener to search field
+        EditText searchText = (EditText) findViewById(R.id.search_field);
+        searchText.addTextChangedListener(new SearchKeyListener());
+
     }
 
 
@@ -73,12 +79,15 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d(LOG_TAG, "onItemClick");
-        // TODO: Select drink
+        // Get the drink
+        if (position < drinks.size()) {
+            selectDrink(drinks.get(position));
+        }
     }
 
     public void selectDrink(Drink drink) {
-        // TODO
+        Log.d(LOG_TAG, "Clicked on " + drink);
+        //Consum0r.getInstance().consume(drink);
     }
 
 
@@ -98,6 +107,17 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
         public void afterTextChanged(Editable s) {
             // Change the list with search results
 
+            List<String> selectedDrinks = new ArrayList<String>();
+            drinkNames.clear();
+            String query = String.format("%s", s.toString());
+
+            for (Drink d : drinks) {
+                if (d.toString().toLowerCase().contains(query.toLowerCase())) {
+                    drinkNames.add(d.toString());
+                }
+            }
+
+            drinksAdapter.notifyDataSetChanged();
         }
     }
 }

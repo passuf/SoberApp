@@ -55,6 +55,9 @@ public class MainActivity extends Activity {
     private void update(){
 
         long timeDiffMin = (alc.timeSober().getTime() - System.currentTimeMillis())/(1000*60);
+        if (timeDiffMin < 0) {
+            timeDiffMin = 0;
+        }
         long timeDiffHour = timeDiffMin/60;
         timeDiffMin = timeDiffMin % 60;
         TextView soberTime = (TextView) findViewById(R.id.soberTime);

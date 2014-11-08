@@ -17,7 +17,7 @@ public class Consum0r {
     }
 
     private Consum0r() {
-        List<Consume> list = find(Consume.class, null, null, null, "ORDER BY tsp DESC LIMIT 1", null);
+        List<Consume> list = find(Consume.class, null, null, null, "tsp DESC", "1");
         last = !list.isEmpty() ? list.get(0) : new Consume(null, 0, 0);
     }
 

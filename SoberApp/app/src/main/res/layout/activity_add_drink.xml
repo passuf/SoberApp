@@ -19,4 +19,11 @@
         android:lines="1"
         android:maxLines="1"
         android:inputType="textPersonName" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/drinks_listView"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

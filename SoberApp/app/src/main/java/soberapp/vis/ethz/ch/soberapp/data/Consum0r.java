@@ -1,15 +1,20 @@
 package soberapp.vis.ethz.ch.soberapp.data;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.orm.SugarRecord.find;
+import static com.orm.SugarRecord.findAll;
 import static com.orm.SugarRecord.findWithQuery;
+import static com.orm.SugarRecord.listAll;
 
 
 public class Consum0r {
     private static Consum0r instance = new Consum0r();
+
     public static final int TOP_N = 3;
     private Consume last;
 
@@ -29,7 +34,7 @@ public class Consum0r {
         last = c;
     }
 
-    public void pukeLast(){
+    public void pukeLast() {
         Consume c = last;
         last = last.getLast();
         c.delete();
@@ -38,9 +43,22 @@ public class Consum0r {
     public List<Drink> topN() {
         List<Drink> drinks = new LinkedList<Drink>();
         Consume item = last;
-        for(int i = 0; i < TOP_N && item != null; i++){
-            drinks.add(item.getDrink());
+        int i = 0;
+        while (item != null && i < TOP_N) {
             item = item.getLast();
+            if (!drinks.contains(item)) {
+                drinks.add(item.getDrink());
+                i++;
+            }
+        }
+        // fill with default, assuming more then 3 drinks in DB
+        Iterator<Drink> it = findAll(Drink.class);
+        while (i < TOP_N && it.hasNext()) {
+            Drink next = it.next();
+            if (!drinks.contains(next)) {
+                drinks.add(next);
+                i++;
+            }
         }
         return drinks;
     }

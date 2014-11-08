@@ -25,6 +25,7 @@
     <string name="add_last_drink">TODO</string>
     <string name="add_2last_drink">TODO</string>
     <string name="add_3last_drink">TODO</string>
+    <string name="create_drink">Create new Drink</string>
     <string-array name="gender_selection">
         <item>Female</item>
         <item>Male</item>

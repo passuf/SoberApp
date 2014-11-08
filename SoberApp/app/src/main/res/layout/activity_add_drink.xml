@@ -26,4 +26,5 @@
         android:id="@+id/drinks_listView"
         android:layout_below="@+id/search_field"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

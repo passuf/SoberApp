@@ -1,12 +1,15 @@
 package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +54,10 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
         drinksAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, drinkNames);
         drinksListView.setAdapter(drinksAdapter);
 
+        // Add button to create new drink
+        View footerView =  ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.drinks_footer, null, false);
+        drinksListView.addFooterView(footerView);
+
         // Add listener to search field
         EditText searchText = (EditText) findViewById(R.id.search_field);
         searchText.addTextChangedListener(new SearchKeyListener());
@@ -87,9 +94,24 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     public void selectDrink(Drink drink) {
         Log.d(LOG_TAG, "Clicked on " + drink);
-        //Consum0r.getInstance().consume(drink);
+        Consum0r.getInstance().consume(drink);
+        finish();
     }
 
+    public void onCreateDrink(View v) {
+        Log.d(LOG_TAG, "create drink");
+        Intent intent = new Intent(this, CreateDrinkActivity.class);
+        startActivityForResult(intent, Default.REQUEST_EXIT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Default.REQUEST_EXIT) {
+            if (resultCode == RESULT_OK) {
+                this.finish();
+            }
+        }
+    }
 
     class SearchKeyListener implements TextWatcher {
 

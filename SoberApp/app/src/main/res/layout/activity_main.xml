@@ -14,4 +14,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_drink"
+        android:id="@+id/button_add_drink"
+        android:layout_below="@+id/text_title_main"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:onClick="addDrink" />
+
+    <ListView
+        android:id="@+id/calendarInstancesView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
 </RelativeLayout>

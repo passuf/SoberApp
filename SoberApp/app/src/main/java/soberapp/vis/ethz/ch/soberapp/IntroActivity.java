@@ -1,6 +1,7 @@
 package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -53,14 +54,23 @@ public class IntroActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        // Do nothing for now
+    }
+
     public void onClickStart(View v) {
         Log.d(LOG_TAG, "onClickStart");
 
-        // TODO: validate input before saving anything
-
         // Get the name
-        EditText name = (EditText) findViewById(R.id.text_name);
-        settings.setName(name.getText().toString());
+        EditText nameText = (EditText) findViewById(R.id.text_name);
+        String name = nameText.getText().toString();
+        if (name == null || name.length() < Default.MIN_NAME_LENGTH) {
+            // Name is too short
+            createAlert(getString(R.string.form_error), getString(R.string.invalid_name));
+            return;
+        }
+        settings.setName(name);
 
         // Get the gender
         Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
@@ -68,7 +78,7 @@ public class IntroActivity extends Activity {
 
         // Get the birthday
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date birthday = null;
+        Date birthday = new Date();
         EditText birthdayText = (EditText) findViewById(R.id.text_birthday);
         try {
             String birthdayString = birthdayText.getText().toString();
@@ -79,12 +89,34 @@ public class IntroActivity extends Activity {
         settings.setBirthday(birthday);
 
         // Get the height
-        EditText height = (EditText) findViewById(R.id.text_height);
-        settings.setHeight(Integer.parseInt(height.getText().toString()));
+        EditText heightText = (EditText) findViewById(R.id.text_height);
+        int height = 0;
+        try {
+            height = Integer.parseInt(heightText.getText().toString());
+        } catch (NumberFormatException e) {
+            Log.e(LOG_TAG, "Invalid height");
+        }
+        if (height < Default.MIN_HEIGHT) {
+            // Invalid height
+            createAlert(getString(R.string.form_error), getString(R.string.invalid_height));
+            return;
+        }
+        settings.setHeight(height);
 
         // Get the weight
-        EditText weight = (EditText) findViewById(R.id.text_weight);
-        settings.setWeight(Integer.parseInt(weight.getText().toString()));
+        EditText weightText = (EditText) findViewById(R.id.text_weight);
+        int weight = 0;
+        try {
+            weight = Integer.parseInt(weightText.getText().toString());
+        } catch (NumberFormatException e) {
+            Log.e(LOG_TAG, "Invalid weight");
+        }
+        if (weight < Default.MIN_WEIGHT) {
+            // Invalid weight
+            createAlert(getString(R.string.form_error), getString(R.string.invalid_weight));
+            return;
+        }
+        settings.setWeight(weight);
 
         // Update settings to not display this activity again
         settings.setProfileComplete(true);
@@ -99,5 +131,12 @@ public class IntroActivity extends Activity {
         // Close this activity
         finish();
 
+    }
+
+    public void createAlert(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title).setMessage(message);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

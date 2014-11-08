@@ -54,6 +54,11 @@ public class IntroActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        // Do nothing for now
+    }
+
     public void onClickStart(View v) {
         Log.d(LOG_TAG, "onClickStart");
 

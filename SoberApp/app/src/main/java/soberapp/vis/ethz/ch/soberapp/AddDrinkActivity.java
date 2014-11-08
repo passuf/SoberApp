@@ -25,16 +25,10 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     private static final String LOG_TAG = "AddDrinkActivity";
 
-    private AlcoholLevelCalculator alc;
     private ListView drinksListView;
     private List<Drink> drinks;
     private List<String> drinkNames;
     private ArrayAdapter<String> drinksAdapter;
-
-    public AddDrinkActivity(AlcoholLevelCalculator alc) {
-        this.alc = alc;
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +37,7 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
         setTitle(R.string.title_activity_add_drink);
 
         // Get drinks
-        drinks = alc.getConsumor().drinks();
+        drinks = AlcoholLevelCalculator.getInstance().getConsumor().drinks();
 
         // Create list with drinks
         drinksListView = (ListView) findViewById(R.id.drinks_listView);
@@ -95,7 +89,7 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     public void selectDrink(Drink drink) {
         Log.d(LOG_TAG, "Clicked on " + drink);
-        alc.addDrink(drink);
+        AlcoholLevelCalculator.getInstance().addDrink(drink);
         finish();
     }
 

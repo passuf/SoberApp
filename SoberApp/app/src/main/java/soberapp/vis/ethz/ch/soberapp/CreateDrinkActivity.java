@@ -16,12 +16,6 @@ import soberapp.vis.ethz.ch.soberapp.data.Produc0r;
 
 public class CreateDrinkActivity extends Activity {
 
-    private AlcoholLevelCalculator alc;
-
-    public CreateDrinkActivity(AlcoholLevelCalculator alc){
-        this.alc = alc;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +72,7 @@ public class CreateDrinkActivity extends Activity {
         Drink drink = Produc0r.getInstance().addDrink(name, percentage, volume);
 
         // Consume drink
-        alc.addDrink(drink);
+        AlcoholLevelCalculator.getInstance().addDrink(drink);
 
         // Close parent activity and return to MainActivity
         setResult(RESULT_OK, null);

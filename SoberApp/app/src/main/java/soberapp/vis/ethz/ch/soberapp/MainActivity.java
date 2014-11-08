@@ -19,15 +19,14 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private static final String LOG_TAG = "MainActivity";
-
+    private AlcoholLevelCalculator alc = AlcoholLevelCalculator.getInstance();
     private Settings settings;
-    private AlcoholLevelCalculator alc;
     private List<Drink> last3Drinks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        alc = new AlcoholLevelCalculator(this);
+        alc.setup(this);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
 

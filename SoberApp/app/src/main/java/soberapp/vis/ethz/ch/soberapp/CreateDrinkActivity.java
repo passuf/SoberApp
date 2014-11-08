@@ -9,6 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import soberapp.vis.ethz.ch.soberapp.data.Consum0r;
+import soberapp.vis.ethz.ch.soberapp.data.Drink;
+import soberapp.vis.ethz.ch.soberapp.data.Produc0r;
+
 
 public class CreateDrinkActivity extends Activity {
 
@@ -50,7 +54,7 @@ public class CreateDrinkActivity extends Activity {
 
         // Get volume
         EditText volumeText = (EditText) findViewById(R.id.create_drink_volume);
-        Double volume = Double.parseDouble(volumeText.getText().toString());
+        int volume = Integer.parseInt(volumeText.getText().toString());
         if (volume < Default.MIN_VOLUME || volume > Default.MAX_VOLUME) {
             createAlert(getString(R.string.form_error), getString(R.string.invalid_volume));
             return;
@@ -64,9 +68,15 @@ public class CreateDrinkActivity extends Activity {
             return;
         }
 
-        // TODO: Create drink
+        // Create drink
+        Drink drink = Produc0r.getInstance().addDrink(name, percentage, volume);
 
-        // TODO: go to MainActivity
+        // Consume drink
+        Consum0r.getInstance().consume(drink);
+
+        // Close parent activity and return to MainActivity
+        setResult(RESULT_OK, null);
+        finish();
 
     }
 

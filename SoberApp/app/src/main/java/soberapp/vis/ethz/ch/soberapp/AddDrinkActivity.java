@@ -1,6 +1,7 @@
 package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -93,16 +94,24 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
 
     public void selectDrink(Drink drink) {
         Log.d(LOG_TAG, "Clicked on " + drink);
-        // TODO: Consume the drink
-        //Consum0r.getInstance().consume(drink);
+        Consum0r.getInstance().consume(drink);
+        finish();
     }
 
     public void onCreateDrink(View v) {
         Log.d(LOG_TAG, "create drink");
         Intent intent = new Intent(this, CreateDrinkActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, Default.REQUEST_EXIT);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Default.REQUEST_EXIT) {
+            if (resultCode == RESULT_OK) {
+                this.finish();
+            }
+        }
+    }
 
     class SearchKeyListener implements TextWatcher {
 

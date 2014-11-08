@@ -12,7 +12,9 @@ public class Produc0r {
 
     }
 
-    public void addDrink(String name, double percent, int size) {
-        new Drink(name, percent, size).save();
+    public Drink addDrink(String name, double percent, int size) {
+        Drink drink = new Drink(name, percent, size);
+        drink.save();
+        return drink;
     }
 }

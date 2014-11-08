@@ -11,6 +11,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import soberapp.vis.ethz.ch.soberapp.data.Drink;
+import soberapp.vis.ethz.ch.soberapp.data.InitialData;
+
+import static com.orm.SugarRecord.deleteAll;
+
 
 public class MainActivity extends Activity {
 
@@ -24,6 +29,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
+
+        // initialize the Database
+        InitialData.initDB();
 
         // Load Settings
         settings = new Settings(this);

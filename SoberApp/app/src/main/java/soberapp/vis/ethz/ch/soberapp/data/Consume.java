@@ -8,6 +8,7 @@ public class Consume extends SugarRecord<Consume> {
     private Drink drink;
     private Timestamp tsp;
     private int amount; /* in ml */
+    private double level;
     
     public Consume(){
     }
@@ -18,10 +19,18 @@ public class Consume extends SugarRecord<Consume> {
         this.amount = amount;
     }
 
-    public Consume(Drink drink, Timestamp tsp, int amount){
+    public Consume(Drink drink, int amount, double level){
+        this.drink = drink;
+        this.tsp = new Timestamp(System.currentTimeMillis());
+        this.amount = amount;
+        this.level = 0;
+    }
+
+    public Consume(Drink drink, Timestamp tsp, int amount, double level){
         this.drink = drink;
         this.tsp = tsp;
         this.amount = amount;
+        this.level = level;
     }
 
     public Drink getDrink() {
@@ -34,5 +43,9 @@ public class Consume extends SugarRecord<Consume> {
 
     public int getAmount() {
         return amount;
+    }
+
+    public double getLevel() {
+        return level;
     }
 }

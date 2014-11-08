@@ -30,6 +30,6 @@ public class Drink extends SugarRecord<Drink> {
 
     @Override
     public String toString(){
-        return name + " - " + size + " - " + percent + "%";
+        return name + " - " + size + "ml - " + percent + "%";
     }
 }

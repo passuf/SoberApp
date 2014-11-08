@@ -1,7 +1,6 @@
 package soberapp.vis.ethz.ch.soberapp.data;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.List;
 import static com.orm.SugarRecord.find;
 import static com.orm.SugarRecord.findAll;
 import static com.orm.SugarRecord.findWithQuery;
-import static com.orm.SugarRecord.listAll;
 
 
 public class Consum0r {
@@ -23,7 +21,7 @@ public class Consum0r {
     }
 
     private Consum0r() {
-        List<Consume> list = new LinkedList<Consume>();//find(Consume.class, null, null, null, "tsp DESC", "1");
+        List<Consume> list = find(Consume.class, null, null, null, "tsp DESC", "1");
         last = !list.isEmpty() ? list.get(0) : null;
     }
 

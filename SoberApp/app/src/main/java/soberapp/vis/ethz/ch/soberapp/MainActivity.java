@@ -1,17 +1,42 @@
 package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
+
+    private static final String LOG_TAG = "MainActivity";
+
+    private Settings settings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle(R.string.app_name);
+
+        // Load Settings
+        settings = new Settings(this);
+
+        // Check if the profile is complete
+        if (!settings.isProfileComplete()) {
+            // Profile not complete, prompt user
+            Intent intent = new Intent(this, IntroActivity.class);
+            startActivity(intent);
+        }
+
+        TextView title = (TextView) findViewById(R.id.text_title_main);
+        title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
+
     }
 
 

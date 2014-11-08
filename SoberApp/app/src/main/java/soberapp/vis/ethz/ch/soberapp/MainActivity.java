@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
         soberTime.setText(String.format("sober in %dh %dmin", timeDiffHour, timeDiffMin));
 
         TextView bac = (TextView) findViewById(R.id.BAC);
-        bac.setText(alc.getAlcoholLevel() + " \u2030");
+        bac.setText(String.format("%.2f", alc.getAlcoholLevel()) + " \u2030");
 
         List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
         EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());

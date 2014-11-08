@@ -1,6 +1,6 @@
 package soberapp.vis.ethz.ch.soberapp.data;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.List;
 
 import static com.orm.SugarRecord.find;
@@ -11,8 +11,10 @@ import static com.orm.SugarRecord.listAll;
 public class Consum0r {
     public static final String TOP_N = "5";
 
+    private Consume last;
     public Consum0r(){
-
+        List<Consume> list = findWithQuery(Consume.class, "SELECT * FROM Consume ORDERBY tsp DESC LIMIT 1");
+        last = !list.isEmpty() ? list.get(0) : new Consume(null, 0, 0);
     }
 
     public void consume(Drink drink, int amount){
@@ -34,5 +36,13 @@ public class Consum0r {
 
     public List<Consume> consumed(Timestamp since, Timestamp until){
         return findWithQuery(Consume.class, "SELECT * FROM Consume WHERE tsp BETWEEN " + since.toString() + " and " + since.toString());
+    }
+
+    public double level(){
+        return last.getLevel();
+    }
+
+    public Timestamp time(){
+        return last.getTsp();
     }
 }

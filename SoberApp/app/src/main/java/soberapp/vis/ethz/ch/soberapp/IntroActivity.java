@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,6 +34,37 @@ public class IntroActivity extends Activity {
 
         // Load settings
         settings = new Settings(this);
+
+        // Restore values
+        if (settings.isProfileComplete()) {
+            TextView title = (TextView) findViewById(R.id.text_intro_title);
+            title.setText(R.string.action_settings);
+
+            TextView description = (TextView) findViewById(R.id.text_description);
+            description.setText("");
+
+            EditText name = (EditText) findViewById(R.id.text_name);
+            name.setText(settings.getName());
+
+            EditText birthday = (EditText) findViewById(R.id.text_birthday);
+            birthday.setText(new SimpleDateFormat("yyy-MM-dd").format(settings.getBirthday()));
+
+            EditText height = (EditText) findViewById(R.id.text_height);
+            height.setText(String.format("%d", settings.getHeight()));
+
+            EditText weight = (EditText) findViewById(R.id.text_weight);
+            weight.setText(String.format("%d", settings.getWeight()));
+
+            Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
+            int id = 0;
+            for (String s : getResources().getStringArray(R.array.gender_selection)) {
+                if (s.equals(settings.getSex())) {
+                    break;
+                }
+                id++;
+            }
+            gender.setSelection(id);
+        }
 
     }
 
@@ -56,7 +90,9 @@ public class IntroActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // Do nothing for now
+        if (settings.isProfileComplete()) {
+            finish();
+        }
     }
 
     public void onClickStart(View v) {

@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            return true;
+            onSettingsClick();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -148,5 +148,10 @@ public class MainActivity extends Activity {
         }
         Consum0r.getInstance().consume(last3Drinks.get(2));
         update();
+    }
+
+    public void onSettingsClick() {
+        Intent intent = new Intent(this, IntroActivity.class);
+        startActivity(intent);
     }
 }

@@ -19,14 +19,12 @@ public class AlcoholLevelCalculator {
     private double alcoholLevel;
     private double reductionFactor;
     private double decFactor;
-    private Context context;
     private Settings settings;
 
     public AlcoholLevelCalculator(Context context, Consum0r consumor)
     {
         this.updateTime = consumor.time().getTime();
         this.alcoholLevel = consumor.level();
-        this.context = context;
         this.settings = new Settings(context);
         if (settings.getSex() == "Female") {
             reductionFactor = 1055 * (0.203 - 0.07 * settings.getAge() + 0.1069 * settings.getHeight() + 0.2466 * settings.getWeight()) / (0.8 * settings.getWeight());
@@ -45,10 +43,8 @@ public class AlcoholLevelCalculator {
         return new Date(updateTime + (long)(alcoholLevel / decFactor * 60 * 1000));
     }
 
-    public double addDrink(Drink drink) {
+    public void addDrink(Drink drink) {
         alcoholLevel += (drink.getSize() * drink.getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor) * 0.9;
-        calculateAlcoholLevel();
-        return alcoholLevel;
     }
 
     private void calculateAlcoholLevel()

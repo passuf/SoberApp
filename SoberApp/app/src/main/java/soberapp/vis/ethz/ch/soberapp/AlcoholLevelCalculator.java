@@ -35,7 +35,6 @@ public class AlcoholLevelCalculator {
             reductionFactor = 1055 * (2.447 - 0.09516 * settings.getAge() + 0.1074 * settings.getHeight() * 0.3362 * settings.getWeight()) / (0.8 * settings.getWeight());
             decFactor = 0.15 / 60;
         }
-
     }
 
     public Date timeSober()
@@ -44,7 +43,7 @@ public class AlcoholLevelCalculator {
     }
 
     public void addDrink(Consume consume) {
-        alcoholLevel += (consume.getAmount() * consume.getDrink().getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor);
+        alcoholLevel += (consume.getAmount() * consume.getDrink().getPercent()/100 * 0.8) / (settings.getWeight() * reductionFactor) * 0.9;
     }
 
     public double getAlcoholLevel()

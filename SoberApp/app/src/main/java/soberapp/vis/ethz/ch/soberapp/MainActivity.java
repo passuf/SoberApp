@@ -62,6 +62,7 @@ public class MainActivity extends Activity {
 
     public void addDrink(View v) {
         Log.d(LOG_TAG, "addDrink");
-        // TODO
+        Intent intent = new Intent(this, AddDrinkActivity.class);
+        startActivity(intent);
     }
 }

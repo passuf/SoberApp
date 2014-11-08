@@ -4,21 +4,21 @@ import com.orm.SugarRecord;
 
 public class Drink extends SugarRecord<Drink> {
     private String name;
-    private double units;
+    private double percent;
     private long lastAccess;
     
     public Drink(){
     }
 
-    public Drink(String name, double units){
+    public Drink(String name, double percent){
         this.name = name;
-        this.units = units;
+        this.percent = percent;
         this.lastAccess = 0;
     }
 
-    public Drink(String name, double units, long lastAccess){
+    public Drink(String name, double percent, long lastAccess){
         this.name = name;
-        this.units = units;
+        this.percent = percent;
         this.lastAccess = lastAccess;
     }
 
@@ -26,8 +26,8 @@ public class Drink extends SugarRecord<Drink> {
         return name;
     }
 
-    public double getUnits() {
-        return units;
+    public double getPercent() {
+        return percent;
     }
 
     public long getLastAccess() {

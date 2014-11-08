@@ -5,6 +5,7 @@ import com.orm.SugarRecord;
 public class Drink extends SugarRecord<Drink> {
     private String name;
     private double percent;
+
     private long lastAccess;
     
     public Drink(){
@@ -32,5 +33,14 @@ public class Drink extends SugarRecord<Drink> {
 
     public long getLastAccess() {
         return lastAccess;
+    }
+
+    public void setLastAccess(long lastAccess) {
+        this.lastAccess = lastAccess;
+    }
+
+    @Override
+    public String toString(){
+        return this.getName() + " - " + this.getPercent() + "%";
     }
 }

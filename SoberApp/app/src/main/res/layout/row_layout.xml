@@ -8,6 +8,7 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textSize="20sp"
         android:layout_weight="1"
         android:textStyle="bold"
         />
@@ -16,6 +17,6 @@
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="8dp"
+        android:textSize="12sp"
         android:textStyle="italic"/>
 </LinearLayout>

@@ -5,22 +5,15 @@ import com.orm.SugarRecord;
 public class Drink extends SugarRecord<Drink> {
     private String name;
     private double percent;
+    private int size; /* in ml */
 
-    private long lastAccess;
-    
     public Drink(){
     }
 
-    public Drink(String name, double percent){
+    public Drink(String name, double percent, int size){
         this.name = name;
         this.percent = percent;
-        this.lastAccess = 0;
-    }
-
-    public Drink(String name, double percent, long lastAccess){
-        this.name = name;
-        this.percent = percent;
-        this.lastAccess = lastAccess;
+        this.size = size;
     }
 
     public String getName() {
@@ -31,16 +24,12 @@ public class Drink extends SugarRecord<Drink> {
         return percent;
     }
 
-    public long getLastAccess() {
-        return lastAccess;
-    }
-
-    public void setLastAccess(long lastAccess) {
-        this.lastAccess = lastAccess;
+    public int getSize() {
+        return size;
     }
 
     @Override
     public String toString(){
-        return this.getName() + " - " + this.getPercent() + "%";
+        return name + " - " + size + " - " + percent + "%";
     }
 }

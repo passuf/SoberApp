@@ -1,6 +1,7 @@
 package soberapp.vis.ethz.ch.soberapp.data;
 
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 
 import static com.orm.SugarRecord.find;
@@ -9,7 +10,7 @@ import static com.orm.SugarRecord.findWithQuery;
 
 public class Consum0r {
     private static Consum0r instance = new Consum0r();
-    public static final String TOP_N = "3";
+    public static final int TOP_N = 3;
     private Consume last;
 
     public static Consum0r getInstance() {
@@ -17,19 +18,31 @@ public class Consum0r {
     }
 
     private Consum0r() {
-        List<Consume> list = find(Consume.class, null, null, null, "tsp DESC", "1");
-        last = !list.isEmpty() ? list.get(0) : new Consume(null, 0, 0);
+        List<Consume> list = new LinkedList<Consume>();//find(Consume.class, null, null, null, "tsp DESC", "1");
+        last = !list.isEmpty() ? list.get(0) : null;
     }
 
-    public void consume(Drink drink, int amount) {
-        drink.setLastAccess(last.getDrink().getLastAccess() + 1);
-        Consume c = new Consume(drink, amount);
+    public void consume(Drink drink) {
+        // TODO recalculate level
+        Consume c = new Consume(drink, last, 0);
         c.save();
         last = c;
     }
 
+    public void pukeLast(){
+        Consume c = last;
+        last = last.getLast();
+        c.delete();
+    }
+
     public List<Drink> topN() {
-        return find(Drink.class, null, null, null, "lastAccess DESC", TOP_N);
+        List<Drink> drinks = new LinkedList<Drink>();
+        Consume item = last;
+        for(int i = 0; i < TOP_N && item != null; i++){
+            drinks.add(item.getDrink());
+            item = item.getLast();
+        }
+        return drinks;
     }
 
     public List<Drink> drinks() {
@@ -45,10 +58,10 @@ public class Consum0r {
     }
 
     public double level() {
-        return last.getLevel();
+        return last != null ? last.getLevel() : 0;
     }
 
     public Timestamp time() {
-        return last.getTsp();
+        return last != null ? last.getTsp() : new Timestamp(0);
     }
 }

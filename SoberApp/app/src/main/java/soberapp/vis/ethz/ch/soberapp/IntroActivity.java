@@ -2,21 +2,19 @@ package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -25,6 +23,8 @@ public class IntroActivity extends Activity {
     private static final String LOG_TAG = "IntroActivity";
 
     private Settings settings;
+    private Date birthday;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class IntroActivity extends Activity {
             EditText name = (EditText) findViewById(R.id.text_name);
             name.setText(settings.getName());
 
-            EditText birthday = (EditText) findViewById(R.id.text_birthday);
-            birthday.setText(new SimpleDateFormat("yyy-MM-dd").format(settings.getBirthday()));
+            birthday = settings.getBirthday();
+            updateBirthday();
 
             EditText height = (EditText) findViewById(R.id.text_height);
             height.setText(String.format("%d", settings.getHeight()));
@@ -106,23 +106,16 @@ public class IntroActivity extends Activity {
             createAlert(getString(R.string.form_error), getString(R.string.invalid_name));
             return;
         }
-        settings.setName(name);
 
         // Get the gender
         Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
-        settings.setSex(gender.getSelectedItem().toString());
 
         // Get the birthday
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date birthday = new Date();
-        EditText birthdayText = (EditText) findViewById(R.id.text_birthday);
-        try {
-            String birthdayString = birthdayText.getText().toString();
-            birthday = dateFormat.parse(birthdayString);
-        } catch (ParseException e) {
+        if (birthday == null) {
             Log.e(LOG_TAG, "Could not parse birthday");
+            createAlert(getString(R.string.form_error), getString(R.string.invalid_birthday));
+            return;
         }
-        settings.setBirthday(birthday);
 
         // Get the height
         EditText heightText = (EditText) findViewById(R.id.text_height);
@@ -137,7 +130,6 @@ public class IntroActivity extends Activity {
             createAlert(getString(R.string.form_error), getString(R.string.invalid_height));
             return;
         }
-        settings.setHeight(height);
 
         // Get the weight
         EditText weightText = (EditText) findViewById(R.id.text_weight);
@@ -152,21 +144,24 @@ public class IntroActivity extends Activity {
             createAlert(getString(R.string.form_error), getString(R.string.invalid_weight));
             return;
         }
-        settings.setWeight(weight);
 
-        // Update settings to not display this activity again
+        // Update settings
         settings.setProfileComplete(true);
-
-        Log.d(LOG_TAG, "Created the profile!");
-        Log.d(LOG_TAG, "Name: " + settings.getName());
-        Log.d(LOG_TAG, "Gender: " + settings.getSex());
-        Log.d(LOG_TAG, "Birthday: " + settings.getBirthday().toString());
-        Log.d(LOG_TAG, "Height: " + settings.getHeight());
-        Log.d(LOG_TAG, "Weight: " + settings.getWeight());
+        settings.setName(name);
+        settings.setSex(gender.getSelectedItem().toString());
+        settings.setBirthday(birthday);
+        settings.setHeight(height);
+        settings.setWeight(weight);
 
         // Close this activity
         finish();
 
+    }
+
+    public void updateBirthday() {
+        TextView birthdayText = (TextView) findViewById(R.id.text_birthday);
+        birthdayText.setText(new SimpleDateFormat(Default.DATE_FORMAT).format(birthday));
+        birthdayText.setTextSize(24);
     }
 
     public void createAlert(String title, String message) {
@@ -174,5 +169,30 @@ public class IntroActivity extends Activity {
         builder.setTitle(title).setMessage(message);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void showDatePickerDialog(View v) {
+        Calendar c = Calendar.getInstance();
+        if (birthday != null) {
+            c.setTime(birthday);
+        } else {
+            c.add(Calendar.YEAR, Default.INITIAL_YEARS);
+        }
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog newFragment = new DatePickerDialog(this, new DatePickerFragment(), year, month, day);
+        newFragment.show();
+    }
+
+    class DatePickerFragment implements DatePickerDialog.OnDateSetListener {
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            Calendar c = Calendar.getInstance();
+            c.set(year, month, day);
+            birthday = c.getTime();
+            updateBirthday();
+        }
     }
 }

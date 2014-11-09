@@ -97,29 +97,30 @@
         android:layout_alignRight="@id/button_add_2last_drink"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="7dp"
         android:onClick="addDrink"
         android:background="@drawable/buttonbg"
         android:textColor="#ffffff"/>
-
+<!--
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/text_view_history"
+        android:gravity="right"
         android:id="@+id/text_history"
         android:layout_below="@+id/button_add_drink"
         android:layout_centerHorizontal="true"
         android:onClick="onViewHistory"
         android:clickable="true"
         android:textColor="#ffffff"/>
-
+-->
     <ListView
-        android:layout_below="@id/text_history"
+        android:layout_below="@id/button_add_drink"
         android:id="@+id/calendarInstancesView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="#252525"
+        android:divider="#303030"
         android:dividerHeight="0.5dp"></ListView>
 
 </RelativeLayout>

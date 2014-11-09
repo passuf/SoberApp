@@ -150,6 +150,11 @@ public class MainActivity extends Activity {
         if (id == R.id.action_settings) {
             onSettingsClick();
         }
+
+        if(id == R.id.action_view_history) {
+            onViewHistory(null);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

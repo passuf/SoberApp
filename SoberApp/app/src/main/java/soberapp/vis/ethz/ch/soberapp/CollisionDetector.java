@@ -35,7 +35,8 @@ public class CollisionDetector {
                         CalendarContract.Instances._ID,
                         CalendarContract.Instances.BEGIN,
                         CalendarContract.Instances.END,
-                        CalendarContract.Instances.TITLE};
+                        CalendarContract.Instances.TITLE,
+                        CalendarContract.Instances.EVENT_ID};
         Cursor cursor =
                 CalendarContract.Instances.query(activityContext.getContentResolver(), INSTANCE_PROJECTION, timeNow, timeEnd);
 
@@ -46,7 +47,8 @@ public class CollisionDetector {
             Log.d(LOG_TAG, "Event: " + instanceTitle);
             long instanceStart = Long.valueOf(cursor.getString(cursor.getColumnIndex(CalendarContract.Instances.BEGIN))).longValue();
             long instanceEnd = Long.valueOf(cursor.getString(cursor.getColumnIndex(CalendarContract.Instances.END))).longValue();
-            collisionList.add(new CalendarInstance(instanceStart, instanceEnd, instanceTitle));
+            long ID = Long.valueOf(cursor.getString(cursor.getColumnIndex(CalendarContract.Instances.EVENT_ID)));
+            collisionList.add(new CalendarInstance(instanceStart, instanceEnd, instanceTitle, ID));
         }
         return collisionList;
     }

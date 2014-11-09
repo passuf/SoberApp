@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
     private List<Drink> last3Drinks;
     private Handler handler;
     private Runnable runnable;
+    private EventListAdapter adapter;
 
 
     @Override
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
         settings = new Settings(this);
 
         List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
-        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
+        adapter = new EventListAdapter(eventList, this, alc.timeSober());
         ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
         eventView.setAdapter(adapter);
         eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,11 +105,6 @@ public class MainActivity extends Activity {
         TextView bac = (TextView) findViewById(R.id.BAC);
         bac.setText(String.format("%.2f", alc.getAlcoholLevel()) + " \u2030");
 
-//        List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
-//        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
-//        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
-//        eventView.setAdapter(adapter);
-
         Button addLast = (Button) findViewById(R.id.button_add_last_drink);
         Button add2Last = (Button) findViewById(R.id.button_add_2last_drink);
         Button add3Last = (Button) findViewById(R.id.button_add_3last_drink);
@@ -131,6 +127,8 @@ public class MainActivity extends Activity {
         if (last3Drinks.size()>=3) {
             add3Last.setText(last3Drinks.get(2).getName());
         }
+
+        adapter.notifyDataSetChanged();
     }
 
 

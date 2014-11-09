@@ -2,8 +2,6 @@ package soberapp.vis.ethz.ch.soberapp.data;
 
 import com.orm.SugarRecord;
 
-import java.sql.Timestamp;
-
 public class Consume extends SugarRecord<Consume> {
     private Drink drink;
     private long tsp;
@@ -16,6 +14,13 @@ public class Consume extends SugarRecord<Consume> {
     public Consume(Drink drink, Consume last, double level){
         this.drink = drink;
         this.tsp = System.currentTimeMillis();
+        this.level = level;
+        this.last = last;
+    }
+
+    public Consume(Drink drink, Consume last, double level, long tsp){
+        this.drink = drink;
+        this.tsp = tsp;
         this.level = level;
         this.last = last;
     }

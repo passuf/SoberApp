@@ -1,6 +1,5 @@
 package soberapp.vis.ethz.ch.soberapp.data;
 
-import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,6 +27,7 @@ public class Consum0r {
         Consume last = last();
         if(last != null) {
             last.delete();
+            // TODO reload last level
         }
     }
 

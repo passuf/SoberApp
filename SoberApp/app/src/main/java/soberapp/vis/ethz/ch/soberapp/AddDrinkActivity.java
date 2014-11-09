@@ -39,24 +39,29 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
         // Get drinks
         drinks = AlcoholLevelCalculator.getInstance().getConsumor().drinks();
 
-        // Create list with drinks
+        // Get ListView with drinks
         drinksListView = (ListView) findViewById(R.id.drinks_listView);
+
+        // Add footerView with button to create new drink
+        View footerView = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.drinks_footer, null, false);
+        drinksListView.addFooterView(footerView);
+
+        // Register listener
         drinksListView.setOnItemClickListener(this);
+
+        // Fill list for ListView
         drinkNames = new ArrayList<String>();
         for (Drink d : drinks) {
             drinkNames.add(d.toString());
         }
+
+        // Add adapter
         drinksAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, drinkNames);
         drinksListView.setAdapter(drinksAdapter);
-
-        // Add button to create new drink
-        View footerView = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.drinks_footer, null, false);
-        drinksListView.addFooterView(footerView);
 
         // Add listener to search field
         EditText searchText = (EditText) findViewById(R.id.search_field);
         searchText.addTextChangedListener(new SearchKeyListener());
-
     }
 
 

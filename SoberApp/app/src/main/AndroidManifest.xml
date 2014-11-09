@@ -30,8 +30,8 @@
             android:name=".IntroActivity"
             android:label="@string/title_activity_intro"
             android:parentActivityName=".MainActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="soberapp.vis.ethz.ch.soberapp.MainActivity" />
@@ -56,8 +56,8 @@
             android:name=".CreateDrinkActivity"
             android:label="@string/title_activity_create_drink"
             android:parentActivityName=".AddDrinkActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="soberapp.vis.ethz.ch.soberapp.MainActivity" />

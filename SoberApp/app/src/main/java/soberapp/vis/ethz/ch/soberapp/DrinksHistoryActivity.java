@@ -7,11 +7,14 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
+import com.jjoe64.graphview.CustomLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.*;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -63,6 +66,16 @@ public class DrinksHistoryActivity extends ListActivity {
             i--;
             data[i] = new GraphViewData(a.getTsp(), a.getLevel());
             GraphView graphView = new LineGraphView(this, "Blood Alcohol");
+            graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
+                @Override
+                public String formatLabel(double value, boolean isValueX) {
+                    if (isValueX) {
+                        return (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(value);
+                    }
+                    return null; // let graphview generate Y-axis label for us
+                }
+            });
+            graphView.getGraphViewStyle().setNumHorizontalLabels(2);
             graphView.addSeries(new GraphViewSeries(data));
             LinearLayout layout = (LinearLayout) findViewById(R.id.graph);
             layout.addView(graphView);

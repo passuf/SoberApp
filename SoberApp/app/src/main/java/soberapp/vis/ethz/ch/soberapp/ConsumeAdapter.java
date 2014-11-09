@@ -50,7 +50,6 @@ public class ConsumeAdapter extends ArrayAdapter<Consume> {
         Date date = new Date(itemsArrayList.get(position).getTsp());
         PrettyTime prettyTime = new PrettyTime(Locale.UK);
         String dateString = prettyTime.format(date);
-        //String dateString = new SimpleDateFormat(Default.DATETIME_FORMAT).format(date);
         valueView.setText(dateString);
 
         valueView.setGravity(Gravity.CENTER_VERTICAL);

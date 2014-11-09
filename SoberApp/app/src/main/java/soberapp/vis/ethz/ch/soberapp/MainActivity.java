@@ -85,9 +85,6 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(this, IntroActivity.class);
             startActivity(intent);
         }
-
-        TextView title = (TextView) findViewById(R.id.text_title_main);
-        //title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
         update();
     }
 
@@ -114,7 +111,7 @@ public class MainActivity extends Activity {
             addLast.setTextColor(Color.RED);
             add2Last.setTextColor(Color.RED);
             add3Last.setTextColor(Color.RED);
-            addDrink.setTextColor(Color.RED);
+            addDrink.setTextColor(Color.RED );
         }
 
         last3Drinks = alc.getConsumor().topN();

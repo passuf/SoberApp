@@ -1,10 +1,7 @@
 package soberapp.vis.ethz.ch.soberapp;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.provider.CalendarContract;
 import android.util.Log;
 

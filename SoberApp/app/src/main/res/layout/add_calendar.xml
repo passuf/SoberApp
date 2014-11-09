@@ -19,7 +19,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="@string/add_calendar_entry"
             android:id="@+id/button_add_calendar_entry"
             android:layout_centerHorizontal="true"

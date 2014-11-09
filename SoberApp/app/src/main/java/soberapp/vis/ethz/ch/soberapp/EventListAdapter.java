@@ -45,7 +45,7 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
         String s = formatter.format(event.getEventStart());
         dateView.setText(s);
         if (event.getEventStart().before(soberDate)) {
-            tv.setTextColor(Color.rgb(208, 64, 64));
+            tv.setTextColor(Color.rgb(0xCC, 0, 0));
         } else {
             tv.setTextColor(Color.WHITE);
         }

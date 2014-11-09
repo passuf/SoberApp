@@ -119,6 +119,7 @@
         android:id="@+id/calendarInstancesView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="#c0c0c0"></ListView>
+        android:divider="#252525"
+        android:dividerHeight="0.5dp"></ListView>
 
 </RelativeLayout>

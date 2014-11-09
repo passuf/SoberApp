@@ -18,7 +18,7 @@ public class CollisionDetector {
 
     public static List<CalendarInstance> getCollisions(Context activityContext) {
         long timeNow = System.currentTimeMillis();
-        long timeEnd = System.currentTimeMillis() + 24*60*60*1000;
+        long timeEnd = System.currentTimeMillis() + 48*60*60*1000;
         return getCollisions(activityContext, timeNow, timeEnd);
     }
 

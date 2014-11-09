@@ -14,5 +14,6 @@ public class Default {
     public static final int REQUEST_EXIT = 2;
     public static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final int INITIAL_YEARS = -21;
+    public static final int CONSUMES_HISTORY = -24;
 
 }

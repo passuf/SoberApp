@@ -24,7 +24,7 @@ public class AlcoholLevelCalculator {
 
     public void setup(Context context){
         this.consumor = new Consum0r(this);
-        this.updateTime = consumor.time().getTime();
+        this.updateTime = consumor.time();
         this.alcoholLevel = consumor.level();
         this.settings = new Settings(context);
         if (settings.getSex() == "Female") {
@@ -50,9 +50,9 @@ public class AlcoholLevelCalculator {
     }
 
     public void addDrink(Drink drink) {
-        consumor.consume(drink);
         alcoholLevel += (drink.getSize() * drink.getPercent()/100 * 0.8) / (reductionFactor) * 0.9;
         calculateAlcoholLevel();
+        consumor.consume(drink);
     }
 
     private void calculateAlcoholLevel()

@@ -58,12 +58,12 @@ public class Consum0r {
         return find(Drink.class, null, null, null, "name ASC", null);
     }
 
-    public List<Consume> consumed(Timestamp since) {
-        return findWithQuery(Consume.class, "SELECT * FROM Consume WHERE tsp > '" + since.toString() + "'");
+    public List<Consume> consumed(long since) {
+        return findWithQuery(Consume.class, "SELECT * FROM Consume WHERE tsp > " + since);
     }
 
-    public List<Consume> consumed(Timestamp since, Timestamp until) {
-        return findWithQuery(Consume.class, "SELECT * FROM Consume WHERE tsp BETWEEN '" + since.toString() + "' and '" + until.toString() +"'");
+    public List<Consume> consumed(long since, long until) {
+        return findWithQuery(Consume.class, "SELECT * FROM Consume WHERE tsp BETWEEN "+ since + " and " + until);
     }
 
     public Consume last(){
@@ -76,8 +76,8 @@ public class Consum0r {
         return last != null ? last.getLevel() : 0;
     }
 
-    public Timestamp time() {
+    public long time() {
         Consume last = last();
-        return last != null ? last.getTsp() : new Timestamp(0);
+        return last != null ? last.getTsp() : 0;
     }
 }

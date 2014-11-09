@@ -118,6 +118,8 @@
         android:layout_below="@id/text_history"
         android:id="@+id/calendarInstancesView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:divider="#252525"
+        android:dividerHeight="0.5dp"></ListView>
 
 </RelativeLayout>

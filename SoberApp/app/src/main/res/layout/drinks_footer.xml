@@ -18,10 +18,13 @@
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
             android:text="@string/create_drink"
             android:id="@+id/button_create_drink"
-            android:onClick="onCreateDrink" />
+            android:onClick="onCreateDrink"
+            android:textStyle="bold"
+            android:background="@drawable/buttonbg"
+            android:textColor="#ffffff" />
     </LinearLayout>
 </LinearLayout>

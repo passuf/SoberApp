@@ -13,7 +13,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import soberapp.vis.ethz.ch.soberapp.data.Consume;
-import soberapp.vis.ethz.ch.soberapp.data.Drink;
 
 
 public class DrinksHistoryActivity extends Activity {

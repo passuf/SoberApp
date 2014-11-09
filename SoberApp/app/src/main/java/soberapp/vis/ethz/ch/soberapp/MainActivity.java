@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +29,9 @@ public class MainActivity extends Activity {
     private AlcoholLevelCalculator alc = AlcoholLevelCalculator.getInstance();
     private Settings settings;
     private List<Drink> last3Drinks;
+    private Handler handler;
+    private Runnable runnable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +60,22 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        // Create handler to update the view
+        handler = new Handler(Looper.getMainLooper());
+        runnable = new ReloadRunnable();
+        handler.postDelayed(runnable, Default.RELOAD_TASK_DELAY);
+    }
+
+    @Override
+    public void onPause() {
+        handler.removeCallbacks(runnable);
+        super.onPause();
     }
 
     @Override
     public void onResume() {
+        handler.postDelayed(runnable, Default.RELOAD_TASK_DELAY);
         super.onResume();
 
         // Check if the profile is complete
@@ -74,7 +91,7 @@ public class MainActivity extends Activity {
     }
 
     private void update(){
-
+        Log.d(LOG_TAG, "updating the view");
         long timeDiffMin = (alc.timeSober().getTime() - System.currentTimeMillis())/(1000*60);
         if (timeDiffMin < 0) {
             timeDiffMin = 0;
@@ -175,4 +192,21 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, DrinksHistoryActivity.class);
         startActivity(intent);
     }
+
+
+    class ReloadRunnable implements Runnable {
+        @Override
+        public void run() {
+            try{
+                update();
+            }
+            catch (Exception e) {
+                Log.e(LOG_TAG, "ReloadRunnable: Exception");
+            }
+            finally{
+                handler.postDelayed(this, Default.RELOAD_TASK_DELAY);
+            }
+        }
+    }
+
 }

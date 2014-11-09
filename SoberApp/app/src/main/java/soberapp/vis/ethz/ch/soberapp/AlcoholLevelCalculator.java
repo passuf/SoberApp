@@ -2,6 +2,7 @@ package soberapp.vis.ethz.ch.soberapp;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -59,7 +60,7 @@ public class AlcoholLevelCalculator {
     {
         long currentTime = System.currentTimeMillis();
 
-        alcoholLevel -= (currentTime - updateTime) / 1000 / 60 * decFactor;
+        alcoholLevel -= (currentTime - updateTime) / 1000.0 / 60.0 * decFactor;
         if (alcoholLevel < 0)
             alcoholLevel = 0;
         updateTime = currentTime;

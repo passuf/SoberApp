@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import soberapp.vis.ethz.ch.soberapp.data.Consume;
 
@@ -17,7 +18,7 @@ public class DrinksHistoryActivity extends ListActivity {
     private static final String LOG_TAG = "DrinksHistoryActivity";
 
     private AlcoholLevelCalculator alc = AlcoholLevelCalculator.getInstance();
-    private ArrayList<Consume> drinksList;
+    private List<Consume> drinksList;
     private ArrayAdapter<Consume> drinksAdapter;
 
 
@@ -29,7 +30,7 @@ public class DrinksHistoryActivity extends ListActivity {
 
         Calendar c = Calendar.getInstance();
         c.add(Calendar.HOUR, Default.CONSUMES_HISTORY);
-        drinksList = (ArrayList<Consume>) alc.getConsumor().consumed(c.getTimeInMillis());
+        drinksList = alc.getConsumor().consumed(c.getTimeInMillis());
 
         drinksAdapter = new ConsumeAdapter(this, drinksList);
         setListAdapter(drinksAdapter);

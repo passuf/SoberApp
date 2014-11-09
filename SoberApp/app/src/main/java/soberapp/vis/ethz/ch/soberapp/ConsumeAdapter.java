@@ -14,6 +14,7 @@ import org.ocpsoft.prettytime.PrettyTime;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import soberapp.vis.ethz.ch.soberapp.data.Consume;
@@ -21,9 +22,9 @@ import soberapp.vis.ethz.ch.soberapp.data.Consume;
 public class ConsumeAdapter extends ArrayAdapter<Consume> {
 
     private final Context context;
-    private final ArrayList<Consume> itemsArrayList;
+    private final List<Consume> itemsArrayList;
 
-    public ConsumeAdapter(Context context, ArrayList<Consume> itemsArrayList) {
+    public ConsumeAdapter(Context context, List<Consume> itemsArrayList) {
 
         super(context, R.layout.history_row, itemsArrayList);
 

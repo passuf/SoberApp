@@ -10,15 +10,8 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/text_title_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
         android:id="@+id/soberTime"
         android:text="@string/soberTimeDefault"
-        android:layout_below="@id/text_title_main"
-        android:layout_alignLeft="@+id/text_title_main"
         android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,10 +21,9 @@
     <TextView
         android:id="@+id/BAC"
         android:text="0 \u2030"
-        android:layout_below="@id/text_title_main"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_alignRight="@id/text_title_main"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
@@ -50,12 +42,13 @@
         android:text="@string/add_last_drink"
         android:id="@+id/button_add_last_drink"
         android:layout_below="@+id/BAC"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="3dp"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@id/space"
         android:background="@drawable/buttonbg"
         android:onClick="addLastDrink"
+        android:textStyle="bold"
         android:textColor="#ffffff"/>
 
     <Button
@@ -64,11 +57,12 @@
         android:text="@string/add_2last_drink"
         android:id="@+id/button_add_2last_drink"
         android:layout_below="@+id/BAC"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="3dp"
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@id/space"
         android:onClick="add2LastDrink"
+        android:textStyle="bold"
         android:background="@drawable/buttonbg"
         android:textColor="#ffffff"/>
 
@@ -84,6 +78,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:onClick="add3LastDrink"
+        android:textStyle="bold"
         android:background="@drawable/buttonbg"
         android:textColor="#ffffff"/>
 
@@ -99,6 +94,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="7dp"
         android:onClick="addDrink"
+        android:textStyle="bold"
         android:background="@drawable/buttonbg"
         android:textColor="#ffffff"/>
 <!--
@@ -121,6 +117,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="#303030"
-        android:dividerHeight="0.5dp"></ListView>
+        android:dividerHeight="0.5dp"
+        android:layout_marginTop="20dp"/>
+
 
 </RelativeLayout>

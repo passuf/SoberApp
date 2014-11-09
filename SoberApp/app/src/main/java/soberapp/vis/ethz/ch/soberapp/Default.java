@@ -16,5 +16,6 @@ public class Default {
     public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final int INITIAL_YEARS = -21;
     public static final int CONSUMES_HISTORY = -24;
+    public static final long RELOAD_TASK_DELAY = 15000;
 
 }

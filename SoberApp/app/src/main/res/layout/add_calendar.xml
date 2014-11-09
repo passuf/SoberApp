@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="7dip"
+    android:paddingBottom="7dip"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/add_calendar_entry"
+            android:id="@+id/button_add_calendar_entry"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="7dp"
+            android:onClick="addCalendarEntry"
+            android:textStyle="bold"
+            android:background="@drawable/buttonbg"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+</LinearLayout>

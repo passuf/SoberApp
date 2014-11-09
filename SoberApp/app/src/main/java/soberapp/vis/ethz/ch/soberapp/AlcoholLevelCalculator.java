@@ -2,6 +2,7 @@ package soberapp.vis.ethz.ch.soberapp;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.Date;
 

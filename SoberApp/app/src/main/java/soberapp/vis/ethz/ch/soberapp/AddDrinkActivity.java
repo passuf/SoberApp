@@ -113,6 +113,11 @@ public class AddDrinkActivity extends Activity implements AdapterView.OnItemClic
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        onNavigateUp();
+    }
+
     class SearchKeyListener implements TextWatcher {
 
         @Override

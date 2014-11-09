@@ -15,6 +15,7 @@ import com.jjoe64.graphview.LineGraphView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
 import soberapp.vis.ethz.ch.soberapp.data.Consume;
 
@@ -24,7 +25,7 @@ public class DrinksHistoryActivity extends ListActivity {
     private static final String LOG_TAG = "DrinksHistoryActivity";
 
     private AlcoholLevelCalculator alc = AlcoholLevelCalculator.getInstance();
-    private ArrayList<Consume> drinksList;
+    private List<Consume> drinksList;
     private ArrayAdapter<Consume> drinksAdapter;
 
 
@@ -36,7 +37,7 @@ public class DrinksHistoryActivity extends ListActivity {
 
         Calendar c = Calendar.getInstance();
         c.add(Calendar.HOUR, Default.CONSUMES_HISTORY);
-        drinksList = (ArrayList<Consume>) alc.getConsumor().consumed(c.getTimeInMillis());
+        drinksList = alc.getConsumor().consumed(c.getTimeInMillis());
 
         drinksAdapter = new ConsumeAdapter(this, drinksList);
         setListAdapter(drinksAdapter);
@@ -72,7 +73,7 @@ public class DrinksHistoryActivity extends ListActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.drinks_history, menu);
+        getMenuInflater().inflate(R.menu.drinks_history, menu);
         return true;
     }
 
@@ -82,9 +83,26 @@ public class DrinksHistoryActivity extends ListActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete) {
+            onDeleteLatest();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onDeleteLatest() {
+        // Remove Consume from ListView
+        if (drinksList.size() > 0) {
+            // Remove Consume from ListView
+            drinksList.remove(0);
+            drinksAdapter.notifyDataSetChanged();
+            // Delete Consume from DB
+            alc.getConsumor().pukeLast();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        onNavigateUp();
     }
 }

@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.CalendarContract;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
@@ -27,6 +31,12 @@ public class MainActivity extends Activity {
     private AlcoholLevelCalculator alc = AlcoholLevelCalculator.getInstance();
     private Settings settings;
     private List<Drink> last3Drinks;
+    private Handler handler;
+    private Runnable runnable;
+    private EventListAdapter adapter;
+    private ListView eventView;
+    private List<CalendarInstance> eventList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +51,14 @@ public class MainActivity extends Activity {
         // Load Settings
         settings = new Settings(this);
 
-        List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
-        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
-        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
+        eventList = CollisionDetector.getCollisions(this);
+        adapter = new EventListAdapter(eventList, this, alc.timeSober());
+        eventView = (ListView) findViewById(R.id.calendarInstancesView);
+
+        // Add footerView with button to create new drink
+        View footerView = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.add_calendar, null, false);
+        eventView.addFooterView(footerView);
+
         eventView.setAdapter(adapter);
         eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,10 +70,22 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        // Create handler to update the view
+        handler = new Handler(Looper.getMainLooper());
+        runnable = new ReloadRunnable();
+        handler.postDelayed(runnable, Default.RELOAD_TASK_DELAY);
+    }
+
+    @Override
+    public void onPause() {
+        handler.removeCallbacks(runnable);
+        super.onPause();
     }
 
     @Override
     public void onResume() {
+        handler.postDelayed(runnable, Default.RELOAD_TASK_DELAY);
         super.onResume();
 
         // Check if the profile is complete
@@ -68,13 +95,11 @@ public class MainActivity extends Activity {
             startActivity(intent);
         }
 
-        TextView title = (TextView) findViewById(R.id.text_title_main);
-        //title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
         update();
     }
 
     private void update(){
-
+        Log.d(LOG_TAG, "updating the view");
         long timeDiffMin = (alc.timeSober().getTime() - System.currentTimeMillis())/(1000*60);
         if (timeDiffMin < 0) {
             timeDiffMin = 0;
@@ -87,21 +112,16 @@ public class MainActivity extends Activity {
         TextView bac = (TextView) findViewById(R.id.BAC);
         bac.setText(String.format("%.2f", alc.getAlcoholLevel()) + " \u2030");
 
-//        List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
-//        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
-//        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
-//        eventView.setAdapter(adapter);
-
         Button addLast = (Button) findViewById(R.id.button_add_last_drink);
         Button add2Last = (Button) findViewById(R.id.button_add_2last_drink);
         Button add3Last = (Button) findViewById(R.id.button_add_3last_drink);
         Button addDrink = (Button) findViewById(R.id.button_add_drink);
 
         if (CollisionDetector.getCollisions(this, alc.timeSober().getTime()).size() > 0) {
-            addLast.setTextColor(Color.RED);
-            add2Last.setTextColor(Color.RED);
-            add3Last.setTextColor(Color.RED);
-            addDrink.setTextColor(Color.RED);
+            addLast.setTextColor(Color.rgb(208, 64, 64));
+            add2Last.setTextColor(Color.rgb(208, 64, 64));
+            add3Last.setTextColor(Color.rgb(208, 64, 64));
+            addDrink.setTextColor(Color.rgb(208, 64, 64));
         }
 
         last3Drinks = alc.getConsumor().topN();
@@ -114,6 +134,8 @@ public class MainActivity extends Activity {
         if (last3Drinks.size()>=3) {
             add3Last.setText(last3Drinks.get(2).getName());
         }
+
+        adapter.update(alc.timeSober());
     }
 
 
@@ -180,4 +202,34 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, DrinksHistoryActivity.class);
         startActivity(intent);
     }
+
+    public void addCalendarEntry(View view) {
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.setTimeInMillis(System.currentTimeMillis());
+        Calendar endTime = Calendar.getInstance();
+        endTime.setTimeInMillis(System.currentTimeMillis() + 60*60*1000);
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
+        startActivity(intent);
+    }
+
+
+    class ReloadRunnable implements Runnable {
+        @Override
+        public void run() {
+            try{
+                update();
+            }
+            catch (Exception e) {
+                Log.e(LOG_TAG, "ReloadRunnable: Exception");
+            }
+            finally{
+                handler.postDelayed(this, Default.RELOAD_TASK_DELAY);
+            }
+        }
+    }
+
 }

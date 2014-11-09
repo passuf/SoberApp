@@ -35,6 +35,7 @@ public class AlcoholLevelCalculator {
             reductionFactor = 1.055 * (2.447 - 0.09516 * settings.getAge() + 0.1074 * settings.getHeight() + 0.3362 * settings.getWeight()) / (0.8);
             decFactor = 0.15 / 60;
         }
+        calculateAlcoholLevel();
     }
     private AlcoholLevelCalculator(){
     }
@@ -51,6 +52,7 @@ public class AlcoholLevelCalculator {
     public void addDrink(Drink drink) {
         consumor.consume(drink);
         alcoholLevel += (drink.getSize() * drink.getPercent()/100 * 0.8) / (reductionFactor) * 0.9;
+        calculateAlcoholLevel();
     }
 
     private void calculateAlcoholLevel()
@@ -72,4 +74,5 @@ public class AlcoholLevelCalculator {
     public Consum0r getConsumor() {
         return consumor;
     }
+
 }

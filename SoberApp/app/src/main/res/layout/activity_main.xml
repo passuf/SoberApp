@@ -46,7 +46,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="@string/add_last_drink"
         android:id="@+id/button_add_last_drink"
         android:layout_below="@+id/BAC"
@@ -58,7 +58,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="@string/add_2last_drink"
         android:id="@+id/button_add_2last_drink"
         android:layout_below="@+id/BAC"
@@ -69,7 +69,7 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="@string/add_3last_drink"
         android:id="@+id/button_add_3last_drink"
         android:layout_below="@+id/button_add_last_drink"
@@ -82,7 +82,7 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="@string/add_drink"
         android:id="@+id/button_add_drink"
         android:layout_below="@+id/button_add_2last_drink"

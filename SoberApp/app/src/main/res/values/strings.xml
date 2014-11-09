@@ -45,7 +45,7 @@
     <string name="pick_date">Pick Date</string>
     <string name="text_birthday">Please select your birthday</string>
     <string name="invalid_birthday">Please enter your birthday.</string>
-    <string name="title_activity_drinks_history">DrinksHistoryActivity</string>
+    <string name="title_activity_drinks_history">Drinking History</string>
     <string name="text_view_history">View History</string>
 
 </resources>

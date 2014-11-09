@@ -101,7 +101,7 @@
         android:onClick="addDrink"
         android:background="@drawable/buttonbg"
         android:textColor="#ffffff"/>
-
+<!--
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -114,9 +114,9 @@
         android:onClick="onViewHistory"
         android:clickable="true"
         android:textColor="#ffffff"/>
-
+-->
     <ListView
-        android:layout_below="@id/text_history"
+        android:layout_below="@id/button_add_drink"
         android:id="@+id/calendarInstancesView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

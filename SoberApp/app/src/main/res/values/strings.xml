@@ -4,6 +4,7 @@
     <string name="app_name">SoberApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="delete_latest">Delete Latest</string>
     <string name="action_view_history">View History</string>
     <string name="title_activity_intro">Welcome to our awesome App!</string>
     <string name="intro_description">Please enter your details to get best results.</string>

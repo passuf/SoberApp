@@ -39,7 +39,7 @@ public class DrinksHistoryActivity extends ListActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.drinks_history, menu);
+        getMenuInflater().inflate(R.menu.drinks_history, menu);
         return true;
     }
 
@@ -49,9 +49,21 @@ public class DrinksHistoryActivity extends ListActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete) {
+            onDeleteLatest();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onDeleteLatest() {
+        // Remove Consume from ListView
+        if (drinksList.size() > 0) {
+            // Remove Consume from ListView
+            drinksList.remove(0);
+            drinksAdapter.notifyDataSetChanged();
+            // Delete Consume from DB
+            alc.getConsumor().pukeLast();
+        }
     }
 }

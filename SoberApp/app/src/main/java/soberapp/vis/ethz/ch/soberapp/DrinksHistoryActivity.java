@@ -71,8 +71,9 @@ public class DrinksHistoryActivity extends ListActivity {
                 public String formatLabel(double value, boolean isValueX) {
                     if (isValueX) {
                         return (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(value);
+                    } else {
+                        return String.format("%.2f\u2030", value);
                     }
-                    return null; // let graphview generate Y-axis label for us
                 }
             });
             graphView.getGraphViewStyle().setNumHorizontalLabels(2);

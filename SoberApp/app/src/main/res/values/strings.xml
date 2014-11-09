@@ -8,7 +8,7 @@
     <string name="action_view_history">View History</string>
     <string name="title_activity_intro">Welcome to our awesome App!</string>
     <string name="intro_description">Please enter your details to get best results.</string>
-    <string name="title_activity_add_drink">+</string>
+    <string name="title_activity_add_drink">Select your Drink</string>
     <string name="button_intro_start">Save</string>
     <string name="female">Female</string>
     <string name="male">Male</string>

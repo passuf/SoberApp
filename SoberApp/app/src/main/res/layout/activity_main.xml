@@ -11,11 +11,8 @@
 
     <TextView
         android:id="@+id/text_title_main"
-        android:text="@string/hello_world"
         android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content" />
-
 
     <TextView
         android:id="@+id/soberTime"
@@ -114,10 +111,11 @@
         android:layout_below="@+id/button_add_drink"
         android:layout_centerHorizontal="true"
         android:onClick="onViewHistory"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:textColor="#ffffff"/>
 
     <ListView
-        android:layout_below="@id/button_add_drink"
+        android:layout_below="@id/text_history"
         android:id="@+id/calendarInstancesView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>

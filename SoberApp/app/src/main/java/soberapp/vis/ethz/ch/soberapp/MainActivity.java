@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
         }
 
         TextView title = (TextView) findViewById(R.id.text_title_main);
-        title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
+        //title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
         update();
     }
 

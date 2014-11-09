@@ -7,7 +7,7 @@ public class InitialData {
             new Drink("Stange", 5.0, 300).save();
             new Drink("Chübel", 5.0, 500).save();
             new Drink("Mass", 5.0, 1000).save();
-            new Drink("Stifel", 5.0, 2000).save();
+            new Drink("Stiefel", 5.0, 2000).save();
             new Drink("Cider", 4.0, 500).save();
             new Drink("Champagne", 12, 100).save();
             new Drink("Wine", 13, 100).save();

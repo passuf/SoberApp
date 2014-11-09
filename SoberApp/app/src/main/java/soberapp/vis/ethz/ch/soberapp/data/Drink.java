@@ -32,4 +32,12 @@ public class Drink extends SugarRecord<Drink> {
     public String toString(){
         return name + " - " + size + "ml - " + percent + "%";
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Drink){
+            return ((Drink) o).name.equals(name) && ((Drink) o).size == size && ((Drink) o).percent == percent;
+        }
+        return false;
+    }
 }

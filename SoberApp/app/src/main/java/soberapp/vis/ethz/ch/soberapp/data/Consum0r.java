@@ -40,7 +40,7 @@ public class Consum0r {
         Consume item = last;
         int i = 0;
         while (item != null && i < TOP_N) {
-            if (!drinks.contains(item)) {
+            if (!drinks.contains(item.getDrink())) {
                 drinks.add(item.getDrink());
                 i++;
             }

@@ -49,5 +49,6 @@
     <string name="invalid_birthday">Please enter your birthday.</string>
     <string name="title_activity_drinks_history">Drinking History</string>
     <string name="text_view_history">View History</string>
+    <string name="add_calendar_entry">Add Calendar Entry</string>
 
 </resources>

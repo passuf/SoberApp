@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.CalendarContract;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
@@ -52,6 +54,11 @@ public class MainActivity extends Activity {
         eventList = CollisionDetector.getCollisions(this);
         adapter = new EventListAdapter(eventList, this, alc.timeSober());
         eventView = (ListView) findViewById(R.id.calendarInstancesView);
+
+        // Add footerView with button to create new drink
+        View footerView = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.add_calendar, null, false);
+        eventView.addFooterView(footerView);
+
         eventView.setAdapter(adapter);
         eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -193,6 +200,19 @@ public class MainActivity extends Activity {
 
     public void onViewHistory(View v) {
         Intent intent = new Intent(this, DrinksHistoryActivity.class);
+        startActivity(intent);
+    }
+
+    public void addCalendarEntry(View view) {
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.setTimeInMillis(System.currentTimeMillis());
+        Calendar endTime = Calendar.getInstance();
+        endTime.setTimeInMillis(System.currentTimeMillis() + 60*60*1000);
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
         startActivity(intent);
     }
 

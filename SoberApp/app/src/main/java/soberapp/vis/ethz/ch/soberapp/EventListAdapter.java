@@ -13,9 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import soberapp.vis.ethz.ch.soberapp.CalendarInstance;
-import soberapp.vis.ethz.ch.soberapp.R;
-
 public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
 
     private List<CalendarInstance> eventList;
@@ -38,6 +35,8 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
 
         TextView tv = (TextView) convertView.findViewById(R.id.name);
         TextView dateView = (TextView) convertView.findViewById(R.id.date);
+        dateView.setTextColor(Color.rgb(128,128,128));
+
         CalendarInstance event = eventList.get(position);
 
         tv.setText(event.getEventTitle());
@@ -45,7 +44,9 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
         String s = formatter.format(event.getEventStart());
         dateView.setText(s);
         if (event.getEventStart().before(soberDate)) {
-            tv.setTextColor(Color.RED);
+            tv.setTextColor(Color.rgb(208, 64, 64));
+        } else {
+            tv.setTextColor(Color.WHITE);
         }
 
 

@@ -1,20 +1,25 @@
 package soberapp.vis.ethz.ch.soberapp;
 
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
 import soberapp.vis.ethz.ch.soberapp.data.InitialData;
-import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -35,6 +40,21 @@ public class MainActivity extends Activity {
 
         // Load Settings
         settings = new Settings(this);
+
+        List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
+        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
+        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
+        eventView.setAdapter(adapter);
+        eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                long eventID = ((CalendarInstance) parent.getItemAtPosition(position)).getID();
+                Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
+                Intent intent = new Intent(Intent.ACTION_VIEW)
+                        .setData(uri);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -49,7 +69,7 @@ public class MainActivity extends Activity {
         }
 
         TextView title = (TextView) findViewById(R.id.text_title_main);
-        title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
+        //title.setText("Welcome " + settings.getName() + ", you are " + settings.getAge() + " years old.");
         update();
     }
 
@@ -67,11 +87,10 @@ public class MainActivity extends Activity {
         TextView bac = (TextView) findViewById(R.id.BAC);
         bac.setText(String.format("%.2f", alc.getAlcoholLevel()) + " \u2030");
 
-        List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
-        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
-        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
-        eventView.setAdapter(adapter);
-
+//        List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
+//        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
+//        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
+//        eventView.setAdapter(adapter);
 
         Button addLast = (Button) findViewById(R.id.button_add_last_drink);
         Button add2Last = (Button) findViewById(R.id.button_add_2last_drink);

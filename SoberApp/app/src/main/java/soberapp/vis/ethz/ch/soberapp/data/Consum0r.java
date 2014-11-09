@@ -59,7 +59,7 @@ public class Consum0r {
     }
 
     public List<Consume> consumed(long since) {
-        return findWithQuery(Consume.class, "SELECT * FROM Consume WHERE tsp > " + since);
+        return findWithQuery(Consume.class, "SELECT * FROM Consume WHERE tsp > " + since + " order by tsp desc");
     }
 
     public List<Consume> consumed(long since, long until) {

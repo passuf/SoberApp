@@ -2,6 +2,12 @@ package soberapp.vis.ethz.ch.soberapp.data;
 
 import com.orm.SugarRecord;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import soberapp.vis.ethz.ch.soberapp.Default;
+
 public class Consume extends SugarRecord<Consume> {
     private Drink drink;
     private long tsp;
@@ -39,5 +45,12 @@ public class Consume extends SugarRecord<Consume> {
 
     public Consume getLast() {
         return last;
+    }
+
+    @Override
+    public String toString() {
+        Date date = new Date(tsp);
+        String dateString = new SimpleDateFormat(Default.DATETIME_FORMAT).format(date);
+        return drink.toString() + " (" + dateString + ")";
     }
 }

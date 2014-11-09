@@ -8,10 +8,11 @@ import java.util.Date;
 
 public class CalendarInstance {
 
-    public CalendarInstance(long startTime, long endTime, String eventTitle) {
+    public CalendarInstance(long startTime, long endTime, String eventTitle, long ID) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventTitle = eventTitle;
+        this.ID = ID;
     }
 
     public Date getEventStart(){
@@ -41,4 +42,9 @@ public class CalendarInstance {
     /* event title */
     private String eventTitle;
 
+    private long ID;
+
+    public long getID() {
+        return ID;
+    }
 }

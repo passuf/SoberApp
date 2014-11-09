@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -35,7 +34,6 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
         }
 
         TextView tv = (TextView) convertView.findViewById(R.id.name);
-        tv.setTextColor(Color.WHITE);
         TextView dateView = (TextView) convertView.findViewById(R.id.date);
         dateView.setTextColor(Color.rgb(128,128,128));
         CalendarInstance event = eventList.get(position);
@@ -46,6 +44,8 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
         dateView.setText(s);
         if (event.getEventStart().before(soberDate)) {
             tv.setTextColor(Color.rgb(208, 64, 64));
+        } else {
+            tv.setTextColor(Color.WHITE);
         }
 
 

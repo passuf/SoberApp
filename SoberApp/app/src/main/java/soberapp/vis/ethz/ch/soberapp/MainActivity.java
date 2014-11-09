@@ -108,10 +108,10 @@ public class MainActivity extends Activity {
         Button addDrink = (Button) findViewById(R.id.button_add_drink);
 
         if (CollisionDetector.getCollisions(this, alc.timeSober().getTime()).size() > 0) {
-            addLast.setTextColor(Color.RED);
-            add2Last.setTextColor(Color.RED);
-            add3Last.setTextColor(Color.RED);
-            addDrink.setTextColor(Color.RED );
+            addLast.setTextColor(Color.rgb(208, 64, 64));
+            add2Last.setTextColor(Color.rgb(208, 64, 64));
+            add3Last.setTextColor(Color.rgb(208, 64, 64));
+            addDrink.setTextColor(Color.rgb(208, 64, 64));
         }
 
         last3Drinks = alc.getConsumor().topN();

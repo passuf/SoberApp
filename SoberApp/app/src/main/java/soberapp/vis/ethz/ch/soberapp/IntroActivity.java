@@ -91,7 +91,7 @@ public class IntroActivity extends Activity {
     @Override
     public void onBackPressed() {
         if (settings.isProfileComplete()) {
-            finish();
+            onNavigateUp();
         }
     }
 

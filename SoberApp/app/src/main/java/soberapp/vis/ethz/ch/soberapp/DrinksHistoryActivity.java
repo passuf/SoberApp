@@ -67,4 +67,9 @@ public class DrinksHistoryActivity extends ListActivity {
             alc.getConsumor().pukeLast();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        onNavigateUp();
+    }
 }

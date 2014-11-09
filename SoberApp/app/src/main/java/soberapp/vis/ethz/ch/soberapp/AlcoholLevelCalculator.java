@@ -4,14 +4,10 @@ package soberapp.vis.ethz.ch.soberapp;
 import android.content.Context;
 
 import java.util.Date;
-import java.util.List;
 
 import soberapp.vis.ethz.ch.soberapp.data.Consum0r;
 import soberapp.vis.ethz.ch.soberapp.data.Consume;
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
-import soberapp.vis.ethz.ch.soberapp.data.Predict0r;
-
-import static com.orm.SugarRecord.findAll;
 
 /**
  * Created by schluemi on 08/11/14.
@@ -32,7 +28,7 @@ public class AlcoholLevelCalculator {
         this.alcoholLevel = consumor.level();
         this.settings = new Settings(context);
         if (settings.getSex() == "Female") {
-            reductionFactor = 1055 * (0.203 - 0.07 * settings.getAge() + 0.1069 * settings.getHeight() + 0.2466 * settings.getWeight()) / (0.8);
+            reductionFactor = 1.055 * (0.203 - 0.07 * settings.getAge() + 0.1069 * settings.getHeight() + 0.2466 * settings.getWeight()) / (0.8);
             decFactor = 0.15 / 60;
         }
         else {
@@ -57,9 +53,6 @@ public class AlcoholLevelCalculator {
         alcoholLevel += levelUp(drink);
         calculateAlcoholLevel();
         consumor.consume(drink);
-
-        //just for debug
-        List<Consume> list = Predict0r.predictK(findAll(Consume.class), 5);
     }
 
     public double levelUp(Drink drink){

@@ -60,8 +60,8 @@ public class AlcoholLevelCalculator {
         return (drink.getSize() * drink.getPercent()/100 * 0.8) / (reductionFactor) * 0.9;
     }
 
-    public long timeUp(long delta){
-        return (long) Math.floor(delta / 1000 / 60 * decFactor);
+    public double timeUp(long delta){
+        return delta / 1000.0 / 60.0 * decFactor;
     }
 
     private void calculateAlcoholLevel()

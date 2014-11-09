@@ -46,7 +46,7 @@ public class DrinksHistoryActivity extends ListActivity {
         setListAdapter(drinksAdapter);
 
         if (!drinksList.isEmpty()) {
-            int i = drinksList.size() * 2;
+            int i = drinksList.size() * 2 + 1;
             GraphViewData[] data = new GraphViewData[i];
             Iterator<Consume> it = drinksList.iterator();
             Consume a = it.next();
@@ -65,6 +65,7 @@ public class DrinksHistoryActivity extends ListActivity {
             }
             i--;
             data[i] = new GraphViewData(a.getTsp(), a.getLevel());
+            data[--i] = new GraphViewData(a.getTsp(), 0);
             GraphView graphView = new LineGraphView(this, "Blood Alcohol");
             graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
                 @Override

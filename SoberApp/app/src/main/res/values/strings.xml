@@ -12,7 +12,7 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="default_name">Mrs. X</string>
-    <string name="add_drink">Add Drink</string>
+    <string name="add_drink">Other drinks</string>
     <string name="invalid_name">Please enter a name.</string>
     <string name="invalid_weight">Please enter your weight.</string>
     <string name="invalid_height">Please enter your height.</string>

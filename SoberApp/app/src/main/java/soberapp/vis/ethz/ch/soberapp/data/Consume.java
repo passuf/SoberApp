@@ -6,24 +6,17 @@ import java.sql.Timestamp;
 
 public class Consume extends SugarRecord<Consume> {
     private Drink drink;
-    private Timestamp tsp;
+    private long tsp;
     private double level;
     private Consume last;
     
     public Consume(){
     }
 
-    public Consume(Drink drink, double level){
-        this.drink = drink;
-        this.tsp = new Timestamp(System.currentTimeMillis());
-        this.level = 0;
-        this.last = null;
-    }
-
     public Consume(Drink drink, Consume last, double level){
         this.drink = drink;
-        this.tsp = new Timestamp(System.currentTimeMillis());
-        this.level = 0;
+        this.tsp = System.currentTimeMillis();
+        this.level = level;
         this.last = last;
     }
 
@@ -31,7 +24,7 @@ public class Consume extends SugarRecord<Consume> {
         return drink;
     }
 
-    public Timestamp getTsp() {
+    public long getTsp() {
         return tsp;
     }
 

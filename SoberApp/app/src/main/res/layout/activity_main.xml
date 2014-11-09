@@ -23,7 +23,9 @@
         android:layout_alignLeft="@+id/text_title_main"
         android:textSize="25sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        />
 
 
 
@@ -35,7 +37,9 @@
         android:textStyle="bold"
         android:layout_alignRight="@id/text_title_main"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        />
 
     <TextView
         android:id="@+id/space"
@@ -51,10 +55,13 @@
         android:id="@+id/button_add_last_drink"
         android:layout_below="@+id/BAC"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@id/space"
-        android:onClick="addLastDrink" />
-
+        android:background="@drawable/buttonbg"
+        android:onClick="addLastDrink"
+        android:textColor="#ffffff"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -63,9 +70,13 @@
         android:id="@+id/button_add_2last_drink"
         android:layout_below="@+id/BAC"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@id/space"
-        android:onClick="add2LastDrink" />
+        android:onClick="add2LastDrink"
+        android:background="@drawable/buttonbg"
+        android:textColor="#ffffff"/>
 
     <Button
         android:layout_width="match_parent"
@@ -78,7 +89,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:onClick="add3LastDrink" />
+        android:onClick="add3LastDrink"
+        android:background="@drawable/buttonbg"
+        android:textColor="#ffffff"/>
 
     <Button
         android:layout_width="match_parent"
@@ -91,7 +104,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:onClick="addDrink" />
+        android:onClick="addDrink"
+        android:background="@drawable/buttonbg"
+        android:textColor="#ffffff"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -105,10 +120,10 @@
         android:clickable="true"/>
 
     <ListView
-        android:layout_below="@id/text_history"
+        android:layout_below="@id/button_add_drink"
         android:id="@+id/calendarInstancesView"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/calendarbg"></ListView>
 
 </RelativeLayout>

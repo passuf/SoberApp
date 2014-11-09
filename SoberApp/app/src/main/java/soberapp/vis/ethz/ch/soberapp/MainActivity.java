@@ -16,9 +16,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import soberapp.vis.ethz.ch.soberapp.data.Drink;
 import soberapp.vis.ethz.ch.soberapp.data.InitialData;
-import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -90,7 +91,6 @@ public class MainActivity extends Activity {
 //        EventListAdapter adapter = new EventListAdapter(eventList, this, alc.timeSober());
 //        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
 //        eventView.setAdapter(adapter);
-
 
         Button addLast = (Button) findViewById(R.id.button_add_last_drink);
         Button add2Last = (Button) findViewById(R.id.button_add_2last_drink);

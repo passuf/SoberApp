@@ -27,6 +27,10 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
         this.soberDate = soberDate;
     }
 
+    public void setEventList(List<CalendarInstance> eventList) {
+        this.eventList = eventList;
+    }
+
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {

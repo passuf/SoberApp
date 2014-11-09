@@ -135,7 +135,8 @@ public class MainActivity extends Activity {
         if (last3Drinks.size()>=3) {
             add3Last.setText(last3Drinks.get(2).getName());
         }
-
+        eventList = CollisionDetector.getCollisions(this);
+        adapter.setEventList(eventList);
         adapter.update(alc.timeSober());
     }
 

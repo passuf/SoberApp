@@ -52,4 +52,9 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
 
         return convertView;
     }
+
+    public void update(Date soberDate) {
+        this.soberDate = soberDate;
+        super.notifyDataSetChanged();
+    }
 }

@@ -32,6 +32,8 @@ public class MainActivity extends Activity {
     private Handler handler;
     private Runnable runnable;
     private EventListAdapter adapter;
+    private ListView eventView;
+    private List<CalendarInstance> eventList;
 
 
     @Override
@@ -47,9 +49,9 @@ public class MainActivity extends Activity {
         // Load Settings
         settings = new Settings(this);
 
-        List<CalendarInstance> eventList = CollisionDetector.getCollisions(this);
+        eventList = CollisionDetector.getCollisions(this);
         adapter = new EventListAdapter(eventList, this, alc.timeSober());
-        ListView eventView = (ListView) findViewById(R.id.calendarInstancesView);
+        eventView = (ListView) findViewById(R.id.calendarInstancesView);
         eventView.setAdapter(adapter);
         eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -125,7 +127,7 @@ public class MainActivity extends Activity {
             add3Last.setText(last3Drinks.get(2).getName());
         }
 
-        adapter.notifyDataSetChanged();
+        adapter.update(alc.timeSober());
     }
 
 

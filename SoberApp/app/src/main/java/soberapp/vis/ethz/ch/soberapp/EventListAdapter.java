@@ -36,6 +36,7 @@ public class EventListAdapter extends ArrayAdapter<CalendarInstance> {
         TextView tv = (TextView) convertView.findViewById(R.id.name);
         TextView dateView = (TextView) convertView.findViewById(R.id.date);
         dateView.setTextColor(Color.rgb(128,128,128));
+
         CalendarInstance event = eventList.get(position);
 
         tv.setText(event.getEventTitle());

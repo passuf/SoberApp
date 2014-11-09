@@ -62,6 +62,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="soberapp.vis.ethz.ch.soberapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".DrinksHistoryActivity"
+            android:label="@string/title_activity_drinks_history"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="soberapp.vis.ethz.ch.soberapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

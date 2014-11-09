@@ -151,4 +151,9 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, IntroActivity.class);
         startActivity(intent);
     }
+
+    public void onViewHistory(View v) {
+        Intent intent = new Intent(this, DrinksHistoryActivity.class);
+        startActivity(intent);
+    }
 }

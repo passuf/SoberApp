@@ -72,7 +72,7 @@ public class CreateDrinkActivity extends Activity {
         Drink drink = Produc0r.getInstance().addDrink(name, percentage, volume);
 
         // Consume drink
-        Consum0r.getInstance().consume(drink);
+        AlcoholLevelCalculator.getInstance().addDrink(drink);
 
         // Close parent activity and return to MainActivity
         setResult(RESULT_OK, null);
